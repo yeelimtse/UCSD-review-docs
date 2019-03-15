@@ -60,7 +60,69 @@ where it says HERE.  How can you print the pid of the first child?
 ---
 ## **PA2 - Scheduling**
 ---
+### part A
+**SlowPrintf (n, format, ...)**
+- takes a delay
+- n = 7 is roughly 1 sec delay (*n = 8 is 2 seconds*)
+
+---
+### part B
+**InitSched ()**
+- called at the beginning
+- initialize a scheduling table - all entries **invalid**
+
+**StartingProc (int p)**
+- called by **kernel**
+- starts process p 
+- when fork () creates process p, StartingProc (p) will be called by kernel
+- new created process will be recorded in the scheduling table
+
+**EndingProc (int p)**
+- called by kernel when process p is ending
+- scheduling table will be updated
+
+**SchedProc ()**
+- decide which process to run next by calling `GetSchedPolicy ()`
+- based on different policies, different process will run next
+
+**SetSchedPolicy (p)**
+- p is a policy id
+- calling this function can change the policy used
+- called the first time in **intialization part**
+
+**DoSched ()** 
+- will cause the kernel to make a scheduling decision at the next opportunity time
+- **DO NOT** call `SchedProc ()` directly, just remind the **kernel** `SchedProc ()` should be called eventually
+
+
+---
+### part C
+**HandleTimerIntr ()**
+- is called by the kernel whenever a timer interrupt occurs
+- first thing that `HandleTimerIntr ()` does is to reset the timer to go off again in the future
+- may call `DoSched ()` based on different policies
+
+**MyRequestCPUrate (int p, int n)** 
+- is called by the kernel whenever a process with PID p calls `RequestCPUrate (int n)`, which is a system call that allows a process to request that it should be scheduled to run n > 0 out of every 100 quantums (i.e., n% of the time)
+- By default, processes run at whatever rate is determined by the scheduler, and so a process does not generally have any guarantee of how much CPU time it gets
+- `RequestCPUrate (n)` addresses this by giving the calling process such a guarantee.  Allowable values of n are 0 to 100, where positive (non-zero) values indicate a request to run at n% of the CPU's execution rate, and 0 indicates that it should run at no specific guaranteed rate (the same as the default situation, when a process first starts running)
+- The request with n = 0 is typically used to "undo" a process's previous request where some guaranteed rate was previously in place, and after the n = 0 request is made, the guaranteed rate is no longer in effect
+- returns 0 if successful, -1 if failed
+- request fails when
+  - n is invalid
+  - request results over-allocation of CPU
+- when failed, `MyRequestCPUrate` should have **NO** effect
+- If the sum of the requested rates does not equal 100%, then the remaining fraction should be allocated to processes that have not made rate requests
+
+**SetTimer (int t)** 
+- will cause the timer to interrupt after t timer ticks
+
+**GetTimer ()** 
+- will return the current value of the timer
+
+---
 ## **PA3 - Threading**
+TODO
 ---
 ## **PA4 - Threading**
 ---
