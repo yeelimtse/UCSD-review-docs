@@ -2,9 +2,63 @@
 ---
 ### part A
 - each process has a single thread of control and its own private memory.
-- Fork() is a system call, used to create a new process with memory identical to the caller
 
-## **PA2 - Threading**
+**Fork ()** 
+- is a system call, used to create a new process with memory identical to the caller
+- in the created process, returns 0
+- in the caller process, returns the id of the created process
+- caller keeps running after calling fork () (*in our UMIX system only*)
+
+**Exit ()**
+- terminates a process
+- if not called, a process will terminate once hit the end of clause
+
+**Review questions:**
+1. Change the program to print the value of pid in the code executed by the child.  What does it print, and why?
+    - It should print 0 because after the parent process executed, the child 
+    - process got executed and Fork () will return 0 in child's process.
+
+2. Remove the Exit () statement.  What happens, and why?
+   - If we remove the Exit () statement, in the child's process, the code
+   - will keep executing the following two Printf statement. The reason being 
+   - that one process will not stop until it reaches the end of the code. 
+
+--- 
+### part B
+1. Can you explain the order of what gets printed based on the code?
+   - The Print statement of parent got executed first and after parent 
+   - process reached the end, the first and second child's print statements were executed in order. 
+
+2. Why do you think the first child executes before the second child?
+   - It is because the first child is created before the second child, and the system is a single-thread system.
+  
+3. Move the two print statements executed by the parent to just after
+where it says HERE.  How can you print the pid of the first child?
+   - Save the pid of the first child before hands.
+
+---
+### part C
+**Yield (pid)**
+- caller process yields to process pid
+- when yield returns, return the id of whoever yields back to the caller
+  - for example, if A calls yield to B, and in B, it yields to C, and then C yields back to A. The yield function called by A should return C
+
+
+1. Can you explain the order of what gets printed based on the code?
+	- The parent process first executes, then it yields to its first child whose pid is 2. Since parent process yields, the first child process is executed. After the first child process exits, it returns to the unfinished parent process, printing yield message. 
+ 	- Same process for the second child process.
+
+---
+### part D & E
+1. Can you explain the order of what gets printed based on the code?	
+   - The loop runs 3 times so child 1, 2, and 3 got created in order. After the loop terminated, parent process started to yielding. It first yield to child 4 because the last time c = 4. Then it went into child 4, so "4 starting". Then it went to handoff function, in which child 4 yielded to the previous child. Repeated all the way to parent process. 
+
+   - Then it went back to parent process. Since Yield function returns the identifier of the process that yielded to the one that is now running, r = 2 in this case. So it printed "1 resumed by 2, yielding to 4". 
+
+   - Then it returned to child 4, right after Yield function in handoff function. It loopped back to parent and then exited one by one in order. 
+
+---
+## **PA2 - Scheduling**
 ---
 ## **PA3 - Threading**
 ---
