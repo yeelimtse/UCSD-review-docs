@@ -1,0 +1,329 @@
+# Overview
+--- 
+## Resources - abstraction, mechanism, policy
+- ### CPU time
+    - Context switch & yielding (multi-processes)
+      - Hardware switch user mode to kernel mode & trap user
+    - Timesharing 
+      - Kernel management - system calls or hardware interrupt
+      - Preemption- take away CPU
+    - Threading
+      - Part of a process
+      - Paralleling - to the user - not true
+      - Scheduling - to the kernel - true but slower due to system calls
+    - Scheduling
+      - Shortest first optimal
+      - FCFS
+      - RR - round robin
+      - SPN - shortest next
+      - SRT - shortest remaining time
+      - Multi-level feedback Q - approximately SRT
+      - Priority scheduling - p = 1/CPU_used
+      - Fair share (proportional) - stride sx = L/Rx
+      - RTS - real time
+        - EDF - earliest ddl 100% utilization possible(high overhead)
+        - RMS - rate monotonic scheduling - 1/U
+          - Test - n*(21/n - 1) < ln2 ≈ 69%
+          - Optimal for static priority algorithms
+          - Limited to periodic processes
+    - Synchronization
+      - Prevent race conditions - mutual exclusion
+      - Requirements
+        1. At most 1 process in CS
+        2. Cannot prevent entering if nobody is in CS
+        3. Eventually should be able to enter
+        4. No assumption about CPU speed or number
+      - Peterson’s solution - suffer from busy waiting
+        - Intent[0] = true;
+        - Turn = 1;
+        - While (intent[1] && turn == 1)
+        - “Is it my turn? Anybody else is about to run?”
+      - TSL - test and set lock - suffer from busy waiting
+        - Lock memory bus
+        - Only the first process can pass
+        - return 1 when lock pointer has value 0
+      - Semaphores
+        ```
+        wait(s) - block if zero, else --
+        signal(s) - unblock if any, else ++
+        ```
+        - Pass through and close the gate
+        - **OR**
+        ```
+        wait(s) - --, else if s < 0, block
+        signal(s) - ++ unblock if any
+        ```
+        - Cannot tell a process is blocked
+        - Atomic guaranteed by TSL or peterson’s soln
+  - IPC
+    - Requires data transfer & synchronization
+    - Shared memory + semaphores
+    - Message passing (receive waits for message) - safer
+    - Monitor
+      - Only one process runs at a time
+      - Condition variables - no value, no memory
+      - Problem
+        - Mutex violation - Solution-signal before return
+        - Signal lost because no memory
+  - Deadlock
+    - conditions
+      - Mutex
+      - Hold and wait
+      - No preemption
+      - Circular wait
+    - Attacks
+      - Prevention
+      - Avoidance
+      - Detection - cycle ⇒ potential deadlock
+    - Banker’s algorithm
+      - Safe states → safe
+      - unsafe states → unknown
+    - Recovery - terminate deadlock procs one at a time
+- ### Memory - space
+  - In a process
+    - Text
+    - Data
+    - Stack
+    - Permission - r, w, x
+    - Address space
+  - Compiler	
+    - Don’t know the size of physical memory and where it is
+  - Multi-processes
+    - CPU, memory → pieces
+    - Keep processes in memory → save the cost of switching
+      - First fit
+      - Best fit
+      - Worst fit
+      - Trade-off - memory is cheap, time is expensive
+      - Fragmentation
+        - Internal - paging
+        - External - segment
+        - If no holes - break process into sub-blocks
+          - Easy to fit but complex
+        - 50% rule - `m(holes) = n(blocks)/2`
+        - Lost memory - `f = k/(k + 2), k = h(size)/b(size)`
+        - **The larger hole size is, the more waste**
+        - Pre-sized holes
+          - The buddy system
+          - Fit? → smaller
+          - Not fit → stay
+          - Free → buddy also freed?
+  - Logic memory
+    - Problem of sharing memory
+    - ⇒ logic
+    - Translation
+      - Base register
+      - Bound register
+        - Benefit - protect from other processes
+        - Allow separate location
+    - Fit process into memory
+        - Soln - **break into pieces**
+        - **Segment** - different size
+          - Physical address: `s(from the table) + i(offset)`
+          - s is based on the base & bound register (hardware)
+          - Pros - shared by multiple processes
+          - Cons - variable size (hard to find holes)
+        - **Page** - same size
+          - Physical address: frame of `p + i(offset)`
+            - Pros - simple
+        - Combination
+          - Translation
+            - Cost - twice reference, slow down by 2
+            - Take advantage of locality reference
+          - TLB
+            - Key, frame pair - fast translation
+            - Larger 
+              - higher hit rate
+              - Slower response
+              - Greater expense
+            - Lost in context switch
+            - Solution - store in data, tag with PID
+  - Virtual memory
+    - Concept - Bring in when needed
+    - Page table entry
+      - Page fault - valid bit off
+      - Retry 
+      - Expensive 5~6 orders magnitude slower than RAM
+    - Principle of locality
+      - **Not all pieces referenced**
+      - Recently visited stored in physical memory
+    - Page replacement policy
+      - Remove not in locality of reference
+      - FIFO - oldest
+      - OPT - furthest in future (optimal but not realistic)
+      - LRU - least recently used (locality needed)
+      - OPT ≥ LRU ≥≈ FIFO
+      - Clock algorithm
+        - Kick out old and not recently used
+        - Ref bit set to 1 by hardware (access)
+    - Resident set management
+    - Multiprogramming
+      - Denning’s working set model
+      - if not satisfied in the working set, get the fuck out
+- ### Storage - File system
+  - Attributes (type, times, sizes, access control)
+  - Operations
+  - Kernel buffer - store files’ copy on buffer
+  - Implementation goals
+    - Persistent storage
+    - Support technologies - disks
+    - Best achieve and balance
+  - Structure
+    - File system metadata - system info
+      - sizes
+      - Free lists (bitmaps)
+    - File metadata - file control blocks
+      - Many file control blocks fit into one storage block
+      - Filename 
+    - Data blocks - file content
+      - Contiguous
+      - Extents
+      - Non-contiguous
+      - Keep track of free blocks
+        - Free block map
+        - Double linked list
+        - Bitmap
+    - Directories
+      - Table entry
+        - Branch `name (14) & i-node number (2)`
+  - Performance
+    - SSD - solid state drives
+    - Caching
+    - Clustering
+    - Block size
+  - Reliability
+    - Consistency - saved if crash, write frequently in critical section
+    - Journaling - write log to disk
+- ### I/O
+  - CPU output to device; device input to CPU
+  - Buffered I/O - with kernel buffer
+    - Pros and cons
+  - Unbuffered I/O - with no kernel buffer
+  - I/O system - in kernel
+    - Device-dependent
+    - Device Driver - device specific register reads and writes
+    - Device-independent
+      - Buffering, caching
+      - Locking
+      - Error handling
+      - Storage allocation
+    - User-space I/O
+      - User-level buffering
+      - Spooling daemons?
+    - Overall
+      - TODO
+- ### OS structure
+  - Software block cache design
+    - Hashtable and linked list applied
+- ### Protection 
+  - Kernel forces protect - resource access
+  - Kernel itself needs protection
+  - Formal model
+    - Domain (environment): set of (resource, permission) pairs
+  - **Access Control Lists - ACL**
+    - Resource, list(domain, permissions)
+    - Inefficient - lookup name every time
+    - Easy revoke
+  - **Capability Lists - CL**
+    - domain, list(resource, permissions)
+    - Efficient - have access if have the key
+    - Hard revoke
+  - UNIX protection
+    - Protection domain  - UID (checks a process’ permission)
+    - SETUID - domain switch - run as like the owner
+- ### Security
+  - Confidentiality
+  - Integrity
+  - Authenticity
+    - Passwords
+    - Encryption
+    - challenge/response protocols
+  - Availability
+  - Threats
+    - Trap door - added by compiler
+    - Virus - code attacked
+    - Internet worm - 1988 Nov 2 - copies itself over the network
+    - Denial of service
+      - TCP request - no answer responses ⇒ timeout ⇒ no TCP left available
+    - Intrusion detection
+      - Signature-based - look for patterns of attack (repeated login attempts)
+      - Anomaly-based - unusual behavior (unusual system calls)
+      - Solution - create log and analyze
+  - Cryptography
+    - Secret key 
+      - Authenticates - must be You - only you can decrypt what I encrypt
+      - Fast but hard to distribute
+    - Public key
+      - A → B
+      - A encrypts with B’s public key
+      - B decrypt with its private key
+      - Slow but convenient for distribution
+    - Combination
+      - Public key to start session → then exchange private key
+    - Digital signatures
+- ### Network
+  - Circuit switching (telephone system) vs. packet switching (postal system)
+  - Protocol - agreed message format and transfer procedure
+  - Message
+    - Data
+    - Header
+    - Ex: format: (from, to), contents; procedure: post on refrigerator
+  - Layering (OSI reference model)
+    - Application		email, web
+    - Presentation		
+    - Session		sockets
+    - Transport		TCP, UDP
+    - Network		IP
+    - Link			Ethernet
+    - Physical
+    - **Encapsulation** - higher level n within lower `(n - 1)`
+  - Address
+    - Domain names
+    - IP address
+    - Physical address (Ethernet)
+    - Size
+      - IPv4 - 32 bit - 4 billion
+      - IPv6 - 128 bit - 2.56 * 10^38
+  - Routing 
+  - Scalability - how well does system grow
+  - Error control
+    - Parity
+    - Cyclic redundancy code (CRC) - 
+    - Checksum - more powerful than parity
+    - Automatic repeat request (ARQ) - complex
+    - Two generals’ problem
+      - We can increase the probability of success
+      - Cannot create perfection out of imperfection
+    - End-to-end argument
+      - Don’t provide function at lower layer if you have to do it at higher layer
+- ### Distributed systems
+  - Degree of integration
+  - Advantages
+    - Speed
+    - Reliability
+    - Scalability 
+    - Geographic distribution
+  - Disadvantage
+    - Decentralized control
+    - State uncertain - no shared memory
+    - Action uncertain - conflict decisions
+    - Algorithms are complex
+  - Better or not?
+    - **Little’s law - N = λW**
+  - Client - server model
+  - Peer to peer model (in reality - dynamic client - server model)
+  - Algorithms
+    - Event ordering
+      - No shared memory
+      - Implemented by Local clocks
+        - Timestamp all events based on local clock
+        - Update local clock based on message received
+    - Leader election
+      - **Bully algorithm**
+        - Process P ask “can i be the leader?” to higher Ps
+        - If no responses, P becomes the leader
+        - Highest priority becomes the leader
+    - Mutual exclusion
+      - **Red-black hat problem**
+        - “Is your hat black?”
+        - Common knowledge
