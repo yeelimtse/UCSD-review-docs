@@ -63,7 +63,7 @@ Authors Mao L. & Yilin X. - CSE 132A Winter 2019
         ```
     - Most systems don’t support numeric operations on the recursive query
   - To overcome the limitation - **Embedded SQL**
-    - Client (Full programming language) + DB Server (**[JDBC assignment]()**)
+    - Client (Full programming language) + DB Server (**[JDBC assignment](https://github.com/yeelimtse/UCSD-review-docs/blob/master/cse-132a/assignments/assignment2/PA2.pdf)**)
         ```
         T = G
         Delta = G
