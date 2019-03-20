@@ -131,8 +131,191 @@ Authors Mao L. & Yilin X. - CSE 132A Winter 2019
 
 ---
 # relational algebra
+- Big picture
+  - SQL → Relational Algebra (procedure, provides some operations) → Query Rewriting (more efficient) → Query Execution Plan → Execution
+
+- Projection **π**
+  - Eliminate some columns → Keep all elements in X
+  - R table name; X are attributes of R
+  - πx(R): no duplicates of values of x
+  - Cut the table *vertically* 
+
+- Selection **σ**
+  - Select tuples satisfying condition of the form `(att =/≠ value/att2)`
+  - σ_cond(R), where **cond** is a condition involving only attributes of R
+  - Cut the table *horizontally*
+
+- Union(U), Difference(-)
+  - Apply to tables with the same attributes (*duplicates are eliminated*)
+  - Union and difference of sets of tuples in R and S
+  - Note: r - s: only keep those in R but not in S. (p. 73, Feb 12)
+
+- Join
+  - Operation combining tuples from two tables. (same as natural joins)
+  - If common: Join on the matching terms (*some rows might be lost*)
+  - If no common: cross product
+
+- Renaming **(δ_(actor -> actor 1))**
+  - Change the name of attribute (can rename multiple at once)
+  - The contents are not changed
+
+- **Examples**
+  1. *Titles of currently playing movies*
+        ```
+        π_title(Schedule)
+        ```
+  2. *Titles of moviews by Berto*
+        ```
+        π_title(σ_director=’Berto’(Movie))
+        ```
+  3. *Titles and directors of currently playing movies*
+        ```
+        π_title, director (Movie ⋈ Schedule)
+        ```
+  4. *Pairs of actors acting together in some movie*
+        ```
+        π_actor1, actor2(δ_(actor -> actor1) movie ⋈ δ_(actor -> actor2) movie)
+        ```
+       - Renaming is important, otherwise movie joining movie will output original movie
+       - Denote **we assume there is only one actor in every movie**
+       - If we want to distinct actors, we need `σ_actor1 ≠ actor2` at the beginning
+  5. *Find actors playing in every movie by Berto*
+        ```
+        π_actor(movie) - 
+        π_actor[π_actor(movie) ⋈ π_titles(σ_director=’Berto’(Movie)) - π_actor,title(movie)]
+        ```
+     - Non-monotonic needs **difference**
+     - `π_actor(movie) ⋈ π_titles(σ_director=’Berto’(Movie))`
+       - Find **all** combination of all actors and titles by Berto
+     - `πactor(movie) ⋈ πtitles(σdirector=’Berto’(Movie)) - πactor,title(movie)`
+       - Find actors for which there is a movie by Berto in which they do not act
+- Other operations
+  - Insertection ∩
+  - Division /:
+    - R / S : `{a|<a,b> in R for every b in S}`
+      - If b has value **1, 2**, and in R there is only one pair `<a1, 1>` but on `<a1, 2>`
+      - Then `a1` will not be in the output of R / S
+    - Universal quantification
+    - Example: *Find actors playing in every movie by Berto*
+        ```
+        π_titles, actor(Movie) / π_titles(σdirector=’Berto’(Movie))
+        ```
+- Note
+  - π is like “there exists”
+  - / is like “for all”
+  - `R / S = πA(R) - πA[πA(R) ⋈ S) - R]`
+
+- Theorem
+  - Calculus and algebra are equivalent (p.84, Feb 12/14)
+  - π -- ∃
+  - σ -- t(A) comp c
+  - U -- V
+  - ⋈ -- Λ
+  - \- -- ¬
+  - ÷ -- ∀
+
+
 ---
-# query processing (includes join minimization)
+# query processing basics (includes join minimization)
+- Conversion between SQL, Calculus, Algebra
+  - Example: *Find the theaters showing movies by Bertolucci*
+    - SQL
+        ```
+        SELECT s.theater
+        FROM schedule s, movie m
+        WHERE s.title = m.title AND m.director = 'Berto"
+        ```
+    - Tuple Calculus
+        ```
+        {t: theater | ∃ s ∈ schedule ∃ m ∈ movie [ t(theater) = m(theater) ∧ s(title) = m(title) ∧ m(director) = Berto] }
+        ```
+    - Relational algebra: `π_theater(Schedule ⋈ σ_director=’Berto’(movie))`
+
+  - Examle: *Find the drinkers who frequent some bars serving Coors*
+    - `π_drinker(frequent ⋈ σ_beer=’Coop’(serves))`
+  - Examle: *Find the drinkers who frequent at least one bar serving a beer they like*
+    - `π_drinker(frequent ⋈ serves ⋈ likes)`
+  - Examle: *Find the drinkers who frequent ONLY bars serving beer they like*
+    - `π_drinker(frequent) - π_drinker[frequent - π_drinker, bar(serves ⋈ likes)]`
+  
+- Query Rewriting
+  - Modify the query to make it more efficient and correct
+  - Without considering the current database
+
+  - Static Optimization
+    - `R ⋈ R → R`
+    - `R - R → ∅`
+    - `∅ ⋈ R → ∅`
+    - R:AB, S: BC
+    - Pushing selection: `σA=a(R ⋈ S) → σ_(A=a) (R) ⋈ S`
+    - Column eleminiaton: `π_A, B(R ⋈ S) → R ⋈ π_B(S)`
+    - Cascading projections: `π_A(π_A,B(T)) → π_A(T)`
+
+  - Other techniques
+    - Nested query decorrelation
+    - Example: *P(A, B), Q(C, D)*
+        ```
+        SELECT count(*) FROM p
+        WHERE a < (SELECT MAX(q.c) FROM q WHERE p.b = q.d
+        ```
+        rewrite as 
+        ```
+        SELECT count(distinct p.*) FROM  p, q
+        WHERE b = d AND a < c
+        ```
+    - View unfolding
+    - Example: *(A, B, C)*
+        ```
+        CREATE VIEW v(d, e, f) AS SELECT a, b, sum(c) FROM R
+        GROUP BY a, b;
+        SELECT d, sum(f) AS total FROM v GROUP BY D
+        ```
+        rewrite as
+        ```
+        SELECT a AS d, sum(C) AS total
+        FROM R
+        GROUP BY A
+        ```
+- Query Evaluation Plan
+  - Additional decisions on evaluation of rewritten query, with partial information about database
+    - Statistical information on data (*size of the tables*)
+    - Common subexpressions
+    - Availability of **indexes** (allows you to locate data on disk)
+
+- MIN of Joins - *minimize the number of tuples in the **FROM** clause (join minimization)*
+  - Example: movie database
+    ```
+    SELECT m1.director
+    FROM movie m1, movie m2, movie m3, schedule s1, schedule s1, schedule s2
+    WHERE m1.director = m2.director AND m2.actor = m3.actor AND m1.title = s1.title AND m3.title = s2.title
+    ```
+    - m2, m3, s2 can be eliminated 
+    ```
+    SELECT m1.director
+    FROM movie m1, schedule s1
+    WHERE m1.title = s1.title
+    ```
+    - 4 joins --> 1 join
+
+  - Example: *Find theaters showing a title by Berto and a title in which Winger acts*
+    ```
+    SELECT s1.theater
+    FROM schedule s1, schedule s2, movie m1, movie m2
+    WHERE s1.theater = s2.theater AND s1.title = m1.title AND m1.director = 'Berto' AND s2.title = m2.title AND m2.actor = 'Winger'
+    ```
+    **with additional constrains**: each title has only one director and each theater shows only one title → x = y, m2.director = ‘Berto’
+    ```
+    SELECT s1.theater
+    FROM movie m1, schedule s1
+    WHERE s1.title = m1.title AND m2.director = "Berto" 
+    AND m2.actor = "Winger"
+    ```
+  - Origins of Redundant Joins
+    - Complex queries written by humans
+    - Queries resulting from view unfolding
+      - Example: Patience and doctors from “Scripps”, (p. 85-96, Feb 19)
+    - Very complex SQL queries generated by tools
+
 ---
 # schema design
 ---
