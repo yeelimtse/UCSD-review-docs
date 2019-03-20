@@ -55,79 +55,79 @@ Authors Mao L. & Yilin X. - CSE 132A Winter 2019
 
   - Problematic Example
     - Never terminates
-    ```
-    CREATE RECURSIVE VIEW T as 
-    SELECT a, 0 AS n FROM R
-    UNION
-    SELECT a, n + 1 as N FROM T
-    ```
+        ```
+        CREATE RECURSIVE VIEW T as 
+        SELECT a, 0 AS n FROM R
+        UNION
+        SELECT a, n + 1 as N FROM T
+        ```
     - Most systems don’t support numeric operations on the recursive query
   - To overcome the limitation - **Embedded SQL**
     - Client (Full programming language) + DB Server (**JDBC assignment**)
-    ```
-    T = G
-    Delta = G
-    while Delta != 0 do
-        T_old = T
-        T = 
-            SELECT * from T
-            UNION
-            SELECT x.A, y.B FROM G x, T y
-            WHERE x.B = y.A
-        Delta = T - T_old
-    return T
-    ```
+        ```
+        T = G
+        Delta = G
+        while Delta != 0 do
+            T_old = T
+            T = 
+                SELECT * from T
+                UNION
+                SELECT x.A, y.B FROM G x, T y
+                WHERE x.B = y.A
+            Delta = T - T_old
+        return T
+        ```
     - Optimization
-    ```
-    T = G
-    Delta = G
-    while Delta != 0 do
-        T_old = T
-        T = 
-            SELECT * from T
-            UNION
-            SELECT x.A, y.B FROM G x, Delta y
-            WHERE x.B = y.A
-        Delta = T - T_old
-    return T
-    ```
+        ```
+        T = G
+        Delta = G
+        while Delta != 0 do
+            T_old = T
+            T = 
+                SELECT * from T
+                UNION
+                SELECT x.A, y.B FROM G x, Delta y
+                WHERE x.B = y.A
+            Delta = T - T_old
+        return T
+        ```
       - Semi-naive: 
         - *instead of using T, we use Delta → use at least one new tuple every time*
         - So we avoid of double counting **the edges already exist in T**
         - No guarantee that it eliminates **all** recomputation. But in practice is better
     - Faster Convergence: *Double Recursion*
-    ```
-    T = G
-    Delta = G
-    while Delta != 0 do
-        T_old = T
-        T = 
-            SELECT * from T
-            UNION
-            SELECT x.A, y.B FROM T x, T y
-            WHERE x.B = y.A
-        Delta = T - T_old
-    return T
-    ```
+        ```
+        T = G
+        Delta = G
+        while Delta != 0 do
+            T_old = T
+            T = 
+                SELECT * from T
+                UNION
+                SELECT x.A, y.B FROM T x, T y
+                WHERE x.B = y.A
+            Delta = T - T_old
+        return T
+        ```
       - Converges in `log(diameter(G))` iterations
       - If use three T’s, it change log base 2 to log base 3. Not a big gain
       - It depends on the implementation whether to use the double recursion
       
     - Semi-naive on Double Recursion: *use at least one new tuple every time*
-    ```
-    T = G
-    Delta = G
-    while Delta != 0 do
-        T_old = T
-        T = 
-            SELECT * FROM T
-            UNION
-            SELECT x.A, y.B FROM Delta x, T y WHERE x.B = y.A
-            UNION
-            SELECT x.A, y.B FROM T x, Delta y WHERE x.B = y.A
-        Delta = T - T_old
-    return T
-    ```
+        ```
+        T = G
+        Delta = G
+        while Delta != 0 do
+            T_old = T
+            T = 
+                SELECT * FROM T
+                UNION
+                SELECT x.A, y.B FROM Delta x, T y WHERE x.B = y.A
+                UNION
+                SELECT x.A, y.B FROM T x, Delta y WHERE x.B = y.A
+            Delta = T - T_old
+        return T
+        ```
 
 ---
 # relational algebra
