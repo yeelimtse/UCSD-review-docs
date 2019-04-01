@@ -394,4 +394,13 @@ Authors Mao L. & Yilin X. - CSE 132A Winter 2019
   - might result in deadlock
   - Theorem: 2PL ==> conflict serialization
 
+- Sample Locking System
+  - Don’t trust transactions to request / release locks
+  - Hold all locks until transaction commits
+
+- The objects to lock
+  - Relations/Tuple/Disk block
+  - Large objects (e.g. Relations): need few locks and low concurrency
+  - Small objects (e.g. tuples, fields): need more locks and more concurrency 
+
 ---
