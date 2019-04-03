@@ -1,4 +1,6 @@
-### Lecture 1
+# **ECON 120C**
+---
+## Lecture 1
 - Random Variable
 - Sampling
   - def: *Sampling is the process of taking a smaller group of subjects from a larger population*
@@ -36,3 +38,24 @@
   - `Y_i = a + X_i * beta + u_i`
   - `beta = cov(X, Y) / var(X, Y)`
   - `cov(X, Y) / var(X) = beta + cov(X, u) / var(X)`
+
+---
+## Lecture 2
+- ### **Sample Distribution**
+  - distribution of sample **X_bar** can be very **different** than that of the population **µ**
+  - As the sample size **increases**, the variance of X_bar **decreases**
+  - The shape of the distribution of X_bar depends on that of the population distribution
+  - **Normal population**
+    - N(µ, σ<sup>2</sup> / n): distribution of sample mean X_bar of n idependent observations
+    - N(µ, σ<sup>2</sup>) is the **normal distribution** with mean µ and variance σ
+    - N(0, 1) is the **standard normal distribution**
+    - Even if the population is **not normal**
+      - As sample size **increases**
+        - the distribution looks less like that of population, and more like a Normal distribution
+        - When sample size is large enough, distribution of X_bar is close to Normal
+- ### **Central Limit Theorem**
+  - def: **As the sample size gets large enough, sampling distribution becomes almost Normal regardless of the shape of the population**
+  - X_bar ~ N(µ, σ<sup>2</sup> / n)
+  - for the t-stats, we have **Z<sub>n</sub> = √n (X_bar - µ) / (σ ~ N(0, 1))**
+  - 
+- ### **Asymptotic  Distributions OSL Estimators**
