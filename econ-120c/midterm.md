@@ -59,3 +59,67 @@
   - for the t-stats, we have **Z<sub>n</sub> = √n (X_bar - µ) / (σ ~ N(0, 1))**
   - 
 - ### **Asymptotic  Distributions OSL Estimators**
+
+## Casusality and Causal Model
+- **Bivariate Case**
+  - steps:
+    1. set x to each of its possible values
+    2. let y respond freely without any further intervention
+    3. todo
+    4. todo
+
+  - definition
+    - let `c(x)` be the unique value of y for each x
+    - we call `c(x)` the response function
+    - If `c(x)` is not a constant function, then we say that x causes y. In such case, we call c(x) the casual function
+    - when x causes y, we write `y ← c(x)`
+      - the arrow indicates the causality and causal direction
+      - x is **set** and y is **free** to respond 
+      - x is the **cause**, y is the **effect**
+
+  - **No intervention, no causality**
+    - settable vairable if we can intervene at will to set it to any desired value
+    - exmaple: *race*
+    - free variable 
+      - if we do not intervene to set its value
+
+  - Notation
+    - `y ← c(x)` signifies that the LHS and RHS are not exchangable
+    - causes and effects are different
+    - `y = c(x)` is **incorrect** because it encodes the *exchangablility* of the two sides: `y = c(x)` **iff** `c(x) = y`
+
+
+  - example 1
+    - y: earnings, x: years of schooling
+    - assume: no other variables will cause any difference in earnings
+    - Test whether x causes y, follow the **4 steps**
+    - basically, **force** an individual to have 8, 9, 10 years of schooling and observe the corresponding earnings
+    - ask: *do different years of schooling lead to different earnings?*
+    - **active partition problem** todo
+    - Mostly likely, x causes y
+
+  - example 2
+    - y: 0 or 1 indicating whether it will rain or not
+    - x: percentage of people carrying an umbrealla
+    - Test whether x causes y, set the percentage at different levels by **forcing** individuals to carry unbrellas
+    - Key: *Individuals cannot decide to carry an unbrella or not*
+    - y will not change, so x does **NOT** cause y in this example
+
+
+- Causality vs Prediction todo
+
+- Casusality and Causal Model - Multivariate Case
+  - definition
+    - x = (x<sub>f</sub>, x<sub>o</sub>) where x<sub>f</sub> is a scalar vairable and is the **focus** of interest and x<sub>o</sub> consists of all **other** variables
+
+
+- *Ceteris Paribus* effect
+  - **other things equal**
+  - the effect of one vairable holding all others equal
+  - when x<sub>f</sub> is continuous, `c` is differentiable: ∆(x<sub>f</sub>, x<sub>o</sub>) = todo 
+  - when x<sub>f</sub> is discrete, we define: todo
+  - interpretation: todo
+
+- Bring Models to Data and Linear Causal Model
+  - Bring Causal Models to Data
+  - Linear Causal Model
