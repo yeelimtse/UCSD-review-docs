@@ -45,5 +45,30 @@
         ii. 0 < E<sub>f(x), x</sub>(7) < E<sub>g(x), x</sub>(7), f(7) > 0, g(7) > 0
         
         - 0 < f'(7) * x / f(7) < g'(7) * x / g(7)
-        
-     6. 
+        - f(x) = x, g(x) = x<sup>2</sup>/100
+
+- ### Properties of indifference curve map
+  1. bundles on indifference curves further from the origin are preferred over those on indifference curves closer to the origin
+  2. indifference curves do not cross
+  3. indifference curves slope downward
+  - Hard question
+    - give an exmaple of consumer preference over (x, y) where x > 0, y > 0 satisfying **completeness, transiticity, and "more is better" assumptions**, for which each indifference curve contain a single bundle (binary bundle,either A or B, never be indifferent)
+      - (x<sub>1</sub>, y<sub>1</sub>) > (x<sub>2</sub>, y<sub>2</sub>) if x<sub>1</sub> + y<sub>1</sub> > x<sub>2</sub> + y<sub>2</sub>
+      - TODO
+
+- ### Utility Functions
+  - summarizes a consumer's preference by assigning a numerical value to each possible bundle
+  - x ≥ y is equivalent to U(x) ≥ U(y)
+  - any positive monotonic transformation of U leaves consumer preferences unchanged
+  - F is a positive monotonic transformation if for any x > y, F(x) > F(y)
+    - U = x + y
+    - U = 2x + y does not work because y is not multiplied by a constant
+    - U = 2(x + y), fine
+    - U = (2(x + y) + 3)<sup>3</sup>, fine
+
+- Then, the indifference curve is a level curve of the utility function
+  - U_bar = u(q<sub>1</sub>, q<sub>2</sub>)
+
+- Cobb Douglas 
+  - U = √(q<sub>1</sub>, q<sub>2</sub>)
+  - q<sub>2</sub> = U_bar<sup>2</sup>/q<sub>1</sub>
