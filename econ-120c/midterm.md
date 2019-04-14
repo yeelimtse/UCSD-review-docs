@@ -123,3 +123,32 @@
 - Bring Models to Data and Linear Causal Model
   - Bring Causal Models to Data
   - Linear Causal Model
+
+## **Predictive Model**
+- definition
+  - given 2 variables x, y. Want to predict Y based on X
+  - `ß* = cov(x, y) / var(x)`
+  - `å* = Ey - (Ex)ß*`
+  - Note: *these variables are purely statistic objects, no physical, economical, etc meanings*
+  - Define `e` to be the difference between Y and the linear function å* + Xß*
+  - `Y = (å* + Xß*) + e`, where this model satisfies
+  - `Ee = Ey - (å* + Exß*) = 0` and `cov(x, e) = 0`
+- interpretation
+  - if x changes by 1 unit, then we expect y to change by ß* units
+  - when observe a change in X, other things(observables and unobservables) may have changed
+  - "All else being equal" condition may not be met
+  - The expected change of β units could be due to the change of X **and/or** other variables that change with X
+  - Passive Prediction
+    - make predictions based on the data for which no predictor is exogeously changed
+    - data is passively observed
+    - **do not need causality**
+    - pattern discovery is generally used for passive prediction
+      - example
+        - whether a student graduates from high school is related to his mother's level of education
+        - then we can use the observed level of education for a student's mother to predict whether the sutdent will graduate from high school
+        - this is different from predicting the outcome when we exogenously change the level of education the mother attained.
+  - (å*, ß*) = argmin<sub>a,b</sub>f(a, b), where f(a, b) = E\[(Y-a-Xb)<sup>2</sup>\]
+- Best linear approximation
+  - define `m(x) = E(Y|X = x)`, which is the conditional mean function
+  - this is a function of x: for each given x, we can compute E(Y|X = x) and assign this value to *m(x)*
+  - 
