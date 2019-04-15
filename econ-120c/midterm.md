@@ -60,7 +60,7 @@
   - 
 - ### **Asymptotic  Distributions OSL Estimators**
 
-## Casusality and Causal Model
+## **Casusality and Causal Model**
 - **Bivariate Case**
   - steps:
     1. set x to each of its possible values
@@ -138,17 +138,42 @@
   - when observe a change in X, other things(observables and unobservables) may have changed
   - "All else being equal" condition may not be met
   - The expected change of β units could be due to the change of X **and/or** other variables that change with X
-  - Passive Prediction
+  - **Passive Prediction**
     - make predictions based on the data for which no predictor is exogeously changed
     - data is passively observed
     - **do not need causality**
     - pattern discovery is generally used for passive prediction
       - example
-        - whether a student graduates from high school is related to his mother's level of education
-        - then we can use the observed level of education for a student's mother to predict whether the sutdent will graduate from high school
-        - this is different from predicting the outcome when we exogenously change the level of education the mother attained.
+        - a student graduates from high school is related to his mother's level of education
+        - we can use the observed level of education for a student's mother to predict whether the sutdent will graduate from high school
+        - different from predicting the outcome when we exogenously change the level of education the mother attained.
   - (å*, ß*) = argmin<sub>a,b</sub>f(a, b), where f(a, b) = E\[(Y-a-Xb)<sup>2</sup>\]
-- Best linear approximation
+- **Best linear approximation**
   - define `m(x) = E(Y|X = x)`, which is the conditional mean function
-  - this is a function of x: for each given x, we can compute E(Y|X = x) and assign this value to *m(x)*
-  - 
+  - this is a function of x: for each given x, we can compute `E(Y|X = x)` and assign this value to *m(x)*
+  - $\alpha^* + x \cdot \beta^*$: the best **linear prediction** function under the **mean squared loss**
+    - the target behind the linear regression by the OSL
+
+## **Causal Model**
+- for a linear causal model 
+
+  $Y ← \alpha + X\beta + u$ 
+- where u stands for other and possibly unobserved causal factors
+- interpretation $\beta$
+  - If we intervene and set X to change by 1 unit while keeping all else constant, Y will change by β units
+  - The di§erence between $\beta^*$ and $\beta$ lies in whether all else has been kept as equal.
+- active prediction
+  - If we want to predict the consequence of some action on an outcome of interest, we need to establish a causal or structural relationship
+  - example
+    1. predict final grade in econ 120c if increase study time by one hour per week
+         - assume all other conditions have been kept as equal
+         - so you are making an active prediction
+    2. body weight (Y), considering switching to a whole-grain-only diet (X)
+          - may want to make an active prediction of Y based on X
+    3. music can significantly influence sales
+         - actively vary music tempo played in stores from very slow to quick and observe the results on sales
+- a comparison
+  - | Model               |  correlation | slope | Analysis |
+    |---------------------|:------------:|------:|----------|
+    | Predictive Analysis | left-aligned | $1600 |          |
+    | Causal Inference    |   centered   |   $12 |          |

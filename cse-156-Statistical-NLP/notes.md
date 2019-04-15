@@ -61,7 +61,7 @@
                 - $count*(x) = count(x) - 0.5$
                 - Missing probability mass
                   - $\alpha(w_{i-1})=1-\Sigma_w(Count^*(w_{i-1}, w)/Count(w_{i-1}))$
-                  - 
+                - discount value: $0 || 1$
             4. 
 
 - 
