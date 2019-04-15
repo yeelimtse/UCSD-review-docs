@@ -1,5 +1,10 @@
 # **Statistical NPL**
 ---
+- **Review of Probability**
+  - Joint: $p(X = x, Y=y)$
+  - Conditional: $p(X=x|Y=y)=p(X=x,Y=y)/p(Y=y)$
+  - Always True: $p(X=x, Y=y)=p(X=x|Y=y)\cdot p(Y=y)=p(Y=y|X=x)\cdot p(X=x)$
+  - somtimes true: $p(X=x, Y=y)=p(X=x)\cdot p(Y=y)$
 - **Language Model**
   - def: *a probability distribution over sequences of words (sentences)*
   - `p(sequence of words) -> R`
@@ -34,6 +39,29 @@
               - assign p of 1/|V| to every word -> perplexity = V
               - assign p of 0 to anything -> perplexity = infinity
           - **estimation techniques**
-            - 
+            1. **Smoothing**
+                - flattens spiky distribution
+                - add-one (*Laplace*) smoothing
+                  - q(w<sub>i</sub>|w<sub>i-2</sub>, w<sub>i-1</sub>) = (count(w<sub>i-2</sub>, w<sub>i-1</sub>, w<sub>i</sub>) + 1) / (count(w<sub>i-2</sub>, w<sub>i-1</sub>) + |V|)
+                  - Tends to reassign too much mass to unseen events
+                  - so can be adjusted to add δ where 0 < δ < 1
+                  - normalized by δ|V| instead of |V|
+            2. **Linear Interpolation**
+                - $q(w_i|w_{i-2}, w_{i-1}) =$
+                - $\lambda_1 \times q_{ML}(w_1|w_{i-2}, w_{i-1}) +$
+                - $\lambda_2 \times q_{ML}(w_i|w_{i-1}) +$
+                - $\lambda_3 \times q_{ML}(w_i)$
+                - where $\lambda_1 + \lambda_2 + \lambda_3 = 1$, $\lambda_i ≥ 0$
+                - How to estimate $\lambda$ values
+                  - use the **validation** set to pick $\lambda$
+                  - pick the $\lambda$ that give the highest probability of validation
+                    - grid search 
+                    - expectation Maximization (EM)
+            3. **Discounting methods**
+                - $count*(x) = count(x) - 0.5$
+                - Missing probability mass
+                  - $\alpha(w_{i-1})=1-\Sigma_w(Count^*(w_{i-1}, w)/Count(w_{i-1}))$
+                  - 
+            4. 
 
 - 
