@@ -98,6 +98,3 @@
 - ### **Quasilinear Preferences**
   - u(q<sub>1</sub>, q<sub>2</sub>) = q<sub>1</sub> + u(q<sub>2</sub>)
   - MRS = MRS = -1/u'(q<sub>2</sub>), depends on q<sub>2</sub> only
-  - Consumer preferences
-    - A, B are two consumers
-    - todo
