@@ -177,3 +177,8 @@
     |---------------------|:------------:|------:|----------|
     | Predictive Analysis | left-aligned | $1600 |          |
     | Causal Inference    |   centered   |   $12 |          |
+
+## **Bias of OLS Estimators for the Ceteris Paribus Causal Effect**
+- $Y = \alpha + X \cdot \beta + u$
+- $\beta$ will be the same as $\beta^*$ if there is no correlation between $X$ and $u$
+- The mean of $u$ is 0, denote $Eu = 0$.

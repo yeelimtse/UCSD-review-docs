@@ -65,7 +65,7 @@
         console.log(nextProps, nextState)
     }
     ```
-  - `componentDidUpdate(prevPros, prevState, snapshot)` called after been re-rendered. When called increment or decrement method, DidUpdate gets called
+  - `componentDidUpdate(prevPros, prevState, snapshot)` called after  been re-rendered. When called increment or decrement method, DidUpdate gets called
     ```js
     componentDidUpdate(prevPros, prevState, snapshot) {
         console.log('Component Did Update')

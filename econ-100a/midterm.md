@@ -65,10 +65,32 @@
     - U = 2x + y does not work because y is not multiplied by a constant
     - U = 2(x + y), fine
     - U = (2(x + y) + 3)<sup>3</sup>, fine
+  - Then, the indifference curve is a level curve of the utility function
+    - U_bar = u(q<sub>1</sub>, q<sub>2</sub>)
+  - Cobb Douglas 
+    - U = √(q<sub>1</sub>, q<sub>2</sub>)
+    - q<sub>2</sub> = U_bar<sup>2</sup>/q<sub>1</sub>
 
-- Then, the indifference curve is a level curve of the utility function
-  - U_bar = u(q<sub>1</sub>, q<sub>2</sub>)
-
-- Cobb Douglas 
-  - U = √(q<sub>1</sub>, q<sub>2</sub>)
-  - q<sub>2</sub> = U_bar<sup>2</sup>/q<sub>1</sub>
+# TODO
+- Two Extreme versions of downward-sloping convex indifference curves
+  1. Perfect Substitutes
+     - You will get a 45 degree line
+     - `MRS = -1`, one for one substitution
+     - `MRS = -4`, one for four substitution
+     - Note: **MRS is the same regardless of the value of x or y**
+  2. Perfect complements are the goods that are consumed in fixed proportions
+     - You will get a 90 degree angle, slope 0 and $\infty$
+     - Example: 
+       - cars (X) and tires (Y)
+       - remote (X) and batteries (Y)
+  - u(q<sub>1</sub>, q<sub>2</sub>) = min(aq<sub>1</sub>, bq<sub>2</sub>)
+    - Do not have access of either good, if aq<sub>1</sub> = bq<sub>2</sub>) 
+  - Sometimes it is possible to determine consumer's preference over a few bundles and how they rate other bundles
+  - Question preferences
+    - there exists one commodity which shifts the indifference curve **outward (shift up or right)** as consumption of it increases without changing their **slope**
+    - u(q<sub>1</sub>, q<sub>2</sub>) = u(q<sub>1</sub>) + q<sub>2</sub>
+      - u(q<sub>1</sub>) increasing and concave
+      - example:
+        - u(q<sub>1</sub>, q<sub>2</sub>) = √q<sub>1</sub> + q<sub>2</sub>
+        - u(q<sub>1</sub>, q<sub>2</sub>) = ln(q<sub>1</sub>) + q<sub>2</sub>
+      - MRS = -(u'(q<sub>1</sub>)/1) = -u'(q<sub>1</sub>)

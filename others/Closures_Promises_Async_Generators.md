@@ -42,7 +42,13 @@
     .then(data=>console.log(data))
     .catch(error=>console.log(error.message));
 ```
-
+- A promise is either `resolved` or `rejected`
+  - can pass in anything to `reject`
+  - `p.then(function)`: if the promise is met, then **do** 
+  - `p.catch(function)`: call `reject` if promises breaks
+  - Note: one advantage of **promises** is to *get rid of callback functions*
+  - `p.all([p1, p2, p3]).then()` checks all promises 
+  - `p.race([p1, p2, p3])` returns till the first promise met (only returns **one** message)
 ---
 ## **Await**
 - very similar to **Promises**
