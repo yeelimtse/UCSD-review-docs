@@ -101,3 +101,23 @@
   - Consumer preferences
     - A, B are two consumers
     - todo
+
+- ### **Budget Constrain**
+  - budget I, price p1 and p2
+  - bundle (q1, q2) is feasible if p1\*q1 + p2\*q1 ≤ I(ncome)
+  - budget constraint p1\*q1 + p2\*q1 = I
+    - q1 = I/p1 - p2q2/p1
+    - q2 = I/p2 - p1q1/p2
+  - MRT (Marginal Rate of Transformation) - the slope of budget constrain
+    - **slope: -p1/p2**
+  - Example
+    - I = 60, p2 = 5
+    - p1 = 10 on the first 3 units, p1 = 6 on all units after 3
+    - Graph the budget constrain,
+      - For p2, I/p2 = 60/5 = 12
+      - For p1
+        - the first 3 units, spend $30, I/p1 = 30/10 = 3
+        - the following, p1 = 6, I/p1 = 30/6 = 5
+      - Therefore, have two different slopes, 
+        - slope1 = -2
+        - slope2 = -6/5

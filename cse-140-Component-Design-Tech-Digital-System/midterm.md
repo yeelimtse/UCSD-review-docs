@@ -113,6 +113,43 @@
     - do not care set is important because it allows us to min the function
       - either the input does not happen
       - or the input happens, but the output is ignored
+    - Three types of output
+      - F: on-set, output is 1
+      - R: off-set, output is 0
+      - D: don't-care-set: output can be either 1 or 0
+    - Aim: **MIN # of terms, # of literals**
+    - **K-Maps**
+      - adjacency of miniterms (maxterms): *two miniterms are adjacent if they differ by only one vairable*
+        - example
+          - abc & a'bc: by consensus theorem, bc is the consensus
+          - abc + a'b'c: consensus is bcb'c, which is 0, cannot use better expression, so they are NOT adjacent
+          - abcde and a'bcde are adjacent
+          - a'b'cde and abc'd'e' are not adjacent because their consensus is an **empty set**
+      - Two-variable function 
+        - `f(A,B)`
+            |     | B=0  | B=1 |
+            |-----|------|-----|
+            | A=0 | A'B' | A'B |
+            | A=1 | AB'  | AB  |
+        - output table
+            |     | B=0  | B=1 |
+            |-----|------|-----|
+            | A=0 | 0 | 1 |
+            | A=1 | 1  | 1 |
+        - Row A=1 is true and Column B=1 is true, so `f(A,B)=A+B`
+        - For 2-variable functions, have 2 variables, 4 entries, 4 combinations
+        - For n-variable functions, have n variables, 2<sup>n</sup> entries, 2<sup>n</sup> combinations
+      - Three-variable function
+        - `f(a,b,c)`
+            |     | (0,0) | (0,1) | (1,0) | (1,1) |
+            |-----|-------|-------|-------|-------|
+            | c=0 | 0,1   | 2,1   | 6,1   | 4,1   |
+            | c=1 | 1,0   | 3,0   | 7,0   | 5,0   |
+        - So `f = c'` because `c=0` row has all true values
+        - Note: adjacency applies here
+          - m<sub>0</sub>, and m<sub>4</sub>, m<sub>1</sub> are adjacent
+          - m<sub>0</sub> and m<sub>5</sub> are not adjacent because they differ by **2 variables**
+    - TODO
 ---
 ## **Sequential Nerworks (Midterm 2)**
 - **memory** + **time steps (Clock)**
