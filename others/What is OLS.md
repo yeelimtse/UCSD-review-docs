@@ -1,0 +1,19 @@
+# **What is OLS?**
+- **Ordinary Least Squares**
+- Equation **y = f(x<sub>0</sub>, x<sub>1</sub>, x<sub>2</sub>, ...)**
+- x is independent variable, and we want to see how does the change of x affect y
+- **y_hat = ß<sub>0</sub>_hat+ß<sub>1</sub>_hat * x**
+- Some related terms
+  - residual: `u_hat = y_true - y_hat`, note y_hat is the estimated value of y
+    - We want the sum of residuals `∑u_hat_i` to be 0
+  - SSR: `∑u_hat_i^2`
+    - if SSR is low, then it means all data is very close to our equation
+  - SSE: `∑(y_hat - y_bar)^2`, *note y_bar is the mean of our estimate*
+  - SST: `∑(y_true - y_bar)^2`, *note y_bar is the mean of our estimate*
+    - Total variation in y
+  - **R<sup>2</sup> = SSE / SST = 1 - SSR / SST**
+    - always has value between 0 and 1
+    - how much of the variation in the y is explained by our regression equation
+      - if R<sup>2</sup>=1, **every single point in real world lies on our regression**
+      - if R<sup>2</sup>=0, **no correlation exists between x and y**
+      - The higher the R<sup>2</sup> is, the better the fit is

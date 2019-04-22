@@ -119,7 +119,7 @@
       - D: don't-care-set: output can be either 1 or 0
     - Aim: **MIN # of terms, # of literals**
     - **K-Maps**
-      - adjacency of miniterms (maxterms): *two miniterms are adjacent if they differ by only one vairable*
+      - **adjacency** of miniterms (maxterms): *two miniterms are adjacent if they differ by only one vairable*
         - example
           - abc & a'bc: by consensus theorem, bc is the consensus
           - abc + a'b'c: consensus is bcb'c, which is 0, cannot use better expression, so they are NOT adjacent
@@ -149,7 +149,35 @@
         - Note: adjacency applies here
           - m<sub>0</sub>, and m<sub>4</sub>, m<sub>1</sub> are adjacent
           - m<sub>0</sub> and m<sub>5</sub> are not adjacent because they differ by **2 variables**
-    - TODO
+      - **Boolean Algebra vs K-maps**
+        - variables = planes
+        - product terms = rectangles
+        - miniterms = cells
+        - consensus theorem = adjacency
+      - Implicants, Prime Implicants, Essential Prime Implicants definitions
+        - Implicants  
+          - A product term that has non-empty insersection with on-set F and does not intersect with off-set R
+        - Prime Implicants
+          - An implicant that is **not covered** by any other implicants
+        - Essential PI
+          - A PI that has **an element in on-set F** but is **not covered** by any other PIs
+      - Four-variable function
+        - `f(a,b,c,d)`
+          | cd&ab | 00 | 01 | 10 | 11 |
+          |-------|----|----|----|----|
+          | 00    | 1  | 0  | 0  | 1  |
+          | 01    | 0  | 1  | 0  | 1  |
+          | 10    | 1  | 1  | 0  | 0  |
+          | 11    | 1  | 1  | 0  | 1  |
+        - Procedure for finding the minimal function via K-maps
+          1. Convert truth table to K-map
+          2. Group the adjacent ones: include the largest number of adjacent ones(Prime)
+          3. Create new groups to cover all ones in the map: include **essential prime implicants**
+          4. Select the groups that result in the minimal sum of products
+      - Five-variable function
+        - **simply divide to 2 size of 16 K-maps, with `a=0` and `a=1`**
+      - Six-variable function
+        - **simply divide to 4 size of 16 K-maps, with `a=0 & b=0`, `a=0 & b=1`, `a=1 & b=0`, and `a=1 & b=1`**
 ---
 ## **Sequential Nerworks (Midterm 2)**
 - **memory** + **time steps (Clock)**
