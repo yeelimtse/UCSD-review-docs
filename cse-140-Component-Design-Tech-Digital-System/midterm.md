@@ -12,16 +12,28 @@
     - **larger** market
     - **higher** revenue
     - **more** R & D
-
-
 ---
 ## **Combinational Logic (Midterm 1)**
-- **binary** inputs
+- **binary** inputs - "0" or "1"
+  - choose physical quantity to represent "0" or "1"
+  - Ususally voltage but not always
 - no memory
-- ### Basic CMOS - inverter
-  - transistors as switches TODO
-
+- ### Basic CMOS
+    ![Drag Racing](CMOS.png)
+  - transistors as switches/Gates
+    - **NOT Gate - inverter**
+    - ![Drag Racing](inverter.png)
+    - **AND Gate**
+    - ![Drag Racing](and-gate.png)
+    - **OR Gate**
+    - ![Drag Racing](or-gate.png)
+- ### Boolean Algebra
+  - operators: `AND, OR, NOT, XOR, XNAND, ...`
+  - Note: **Function defines exactly one output value for unique input values, and must include all input possibilities.**
 - ### Handy tools
+  - **Basic Properties**
+      ![Drag Racing](property-of-king.png)
+      ![Drag Racing](more-property.png)
   - **Demorgan's Theorem**
     - `Y = (AB)' = A' + B'`
     - `Y = (A + B)' = A'B'`
@@ -97,7 +109,6 @@
         = (x' + (y' + f(1, 1))(y + f(1, 0)) )(x + (y' + f(0, 1))(y + f(0, 0)) )
         ```
       - remark: *the choice of the variable for expansion is a nontrivial question*
-
 - ### Specification
   - Binary addition
     - Half adder
@@ -139,7 +150,7 @@
             |-----|------|-----|
             | A=0 | 0 | 1 |
             | A=1 | 1  | 1 |
-            
+
         - Row A=1 is true and Column B=1 is true, so `f(A,B)=A+B`
         - For 2-variable functions, have 2 variables, 4 entries, 4 combinations
         - For n-variable functions, have n variables, 2<sup>n</sup> entries, 2<sup>n</sup> combinations
