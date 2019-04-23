@@ -32,8 +32,8 @@
   - Note: **Function defines exactly one output value for unique input values, and must include all input possibilities.**
 - ### Handy tools
   - **Basic Properties**
-      ![Drag Racing](property-of-king.png)
-      ![Drag Racing](more-property.png)
+    ![Drag Racing](property-of-king.png)
+    ![Drag Racing](more-property.png)
   - **Demorgan's Theorem**
     - `Y = (AB)' = A' + B'`
     - `Y = (A + B)' = A'B'`
@@ -65,7 +65,9 @@
         - `AB + A'CD + BCDE` = `A + BCD`
   - **Shannon's Expansion**
     - assumes a switching algebra system
-    - divide a switching function into smaller functions
+    - divide a **switching function** into smaller functions
+      - note: switching function considers ***two-value*** logic system
+      - boolean algebra system considers ***multi-value*** logic system
     - pick a variable `x`, partition the switching function into two cases: `x = 1` and `x = 0`
         ```
         f(x, y, z, ...) = xf(x = 1, y,z, ...) + x'f(x = 0, y, z, ...)
@@ -197,6 +199,36 @@
         - **simply divide to 2 size of 16 K-maps, with `a=0` and `a=1`**
       - Six-variable function
         - **simply divide to 4 size of 16 K-maps, with `a=0 & b=0`, `a=0 & b=1`, `a=1 & b=0`, and `a=1 & b=1`**
+- ### Universal Set of Gates
+  - Motivation
+    - AND, OR, NOT: basic logic gates
+    - NAND, NOR: inverter of AND, OR
+    - XOR: exclusive OR, prioirty check
+  - Def: *A powerful concept to identify the coverage of a set of gates addorded by a given technology*
+  - **Criterion**: If the set of gates can implement AND, OR, and NOT gates, then the set is universal
+  - Examples
+    - {AND, OR, NOT} - yes
+    - {AND, NOT} - yes (Demorgan can produce OR gate)
+      - `y = (a'b')' turns to y = a + b`
+    - {OR, NOT} - yes (Demorgan can produce AND gate)
+      - `y = (a'+b')' turns to y = ab`
+    - `f(x, y) = xy'`
+      - NOT: `f(1, a) = 1a' = a'`
+      - Then we can implement a normal AND by inverting y in f(x, y)
+      - Then by De Morgan, we can implement OR gate
+    - {NAND, NOR}
+    - {XOR} - Not a universal Gate
+    - {XOR, AND} - XOR can implement NOT, so this is universal
+  - **XOR: exclusive ORs**
+    - x $\bigoplus$ y = xy' + x'y
+      - commutative and associative also works on XOR
+      - 1 $\bigoplus$ x = x', 0 $\bigoplus$ x = x
+      - x $\bigoplus$ x = 0, x $\bigoplus$ x' = 1
+      - each time using XOR, number of literals **double**
+      - C<sub>out</sub> = ab + c(a $\bigoplus$ b)
+  - **NAND, NOR Gates**
+    - Inverter + AND/OR
+    - So by De Morgan, NAND and NOR gates can be reduced to OR and AND gates
 ---
 ## **Sequential Nerworks (Midterm 2)**
 - **memory** + **time steps (Clock)**
