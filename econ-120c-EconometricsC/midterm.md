@@ -182,3 +182,8 @@
 - $Y = \alpha + X \cdot \beta + u$
 - $\beta$ will be the same as $\beta^*$ if there is no correlation between $X$ and $u$
 - The mean of $u$ is 0, denote $Eu = 0$.
+
+## **Instrumental Variable**
+- randomization
+  - `Y = å+Xß+u`
+  - X is randomly assigned

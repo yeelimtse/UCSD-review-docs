@@ -98,3 +98,68 @@
 - ### **Quasilinear Preferences**
   - u(q<sub>1</sub>, q<sub>2</sub>) = q<sub>1</sub> + u(q<sub>2</sub>)
   - MRS = MRS = -1/u'(q<sub>2</sub>), depends on q<sub>2</sub> only
+  - Consumer preferences
+    - A, B are two consumers
+    - todo
+
+- ### **Budget Constrain**
+  - budget I, price p1 and p2
+  - bundle (q1, q2) is feasible if p1\*q1 + p2\*q1 ≤ I(ncome)
+  - budget constraint p1\*q1 + p2\*q1 = I
+    - q1 = I/p1 - p2q2/p1
+    - q2 = I/p2 - p1q1/p2
+  - MRT (Marginal Rate of Transformation) - the slope of budget constrain
+    - **slope: -p1/p2**
+  - Example
+    - I = 60, p2 = 5
+    - p1 = 10 on the first 3 units, p1 = 6 on all units after 3
+    - Graph the budget constrain,
+      - For p2, I/p2 = 60/5 = 12
+      - For p1
+        - the first 3 units, spend $30, I/p1 = 30/10 = 3
+        - the following, p1 = 6, I/p1 = 30/6 = 5
+      - Therefore, have two different slopes, 
+        - slope1 = -2
+        - slope2 = -6/5
+  - **Unconstrained** Optimization
+    - Want to MAX `f(x1, x2, ..., xn)`
+    - Then 
+      - f<sup>(1)</sup>(x1, ...) = 0, derivative of x<sub>1</sub>
+      - f<sup>(2)</sup>(x1, ...) = 0, derivative of x<sub>2</sub>
+      - f<sup>(3)</sup>(x1, ...) = 0, derivative of x<sub>3</sub>
+      - etc...
+    - Example
+      - Max `(x1+2x2)(6-2x1-x2)`
+      - f<sup>(1)</sup>(x<sub>1</sub>, ...) = 6 - 4x<sub>2</sub>-x<sub>2</sub>-4x<sub>1</sub> = 0
+      - f<sup>(2)</sup>(x1, ...) = 12 - 4x<sub>1</sub> - 4x<sub>2</sub> - x<sub>1</sub> = 0
+      - 4x<sub>1</sub>+5x<sub>2</sub> = 6
+      - 5x<sub>1</sub>+4x<sub>2</sub> = 12
+      - x<sub>1</sub> = 4
+      - x<sub>2</sub> = -2
+  - **Constrain** Optimization
+    - Max f(x<sub>1</sub>, x<sub>2</sub>), with constrain **g(x<sub>1</sub>, x<sub>2</sub>) = c**
+    - level curves of f, there are infinitely many level curves, but only one that can **MAX**
+    - When level curve is MAX, the constrain has to be tangent to the level curve of the function
+    - slope: **-g<sub>1</sub>(x<sub>1</sub>, x<sub>2</sub>)/g<sub>2</sub>(x<sub>1</sub>, x<sub>2</sub>)** = **-f<sub>1</sub>(x<sub>1</sub>, x<sub>2</sub>)/f<sub>2</sub>(x<sub>1</sub>, x<sub>2</sub>)**
+      - This means that there exists some **scalar λ such that**
+      - **λg<sub>1</sub>(x<sub>1</sub>, x<sub>2</sub>) = f<sub>1</sub>(x<sub>1</sub>, x<sub>2</sub>)** and **λg<sub>2</sub>(x<sub>1</sub>, x<sub>2</sub>) = f<sub>2</sub>(x<sub>1</sub>, x<sub>2</sub>)**
+    - For cases of multiple variables, if want to Max f(x<sub>1</sub>, ..., x<sub>n</sub>) such that g(x<sub>1</sub>, ..., x<sub>n</sub>) = c, the solution (x<sub>1</sub>*, ..., x<sub>n</sub>*) should satisfy that 
+      - f<sub>1</sub>(x<sub>1</sub>, ..., x<sub>n</sub>) = λg<sub>1</sub>(x<sub>1</sub>, ..., x<sub>n</sub>)
+      - etc.
+- ### **Lagrangian Function**
+  - **L(x<sub>1</sub>, ..., x<sub>n</sub>, λ) = f(x<sub>1</sub>, ..., x<sub>n</sub>) + λ(c-g(x<sub>1</sub>, ..., x<sub>n</sub>))**
+  - λ is a **Lagrangian Multiplier**
+    - **Unconstrained** Max of L function
+      - f<sub>1</sub>(x<sub>1</sub>, ..., x<sub>n</sub>) - λg<sub>1</sub>(x<sub>1</sub>, ..., x<sub>n</sub>) = 0
+      - f<sub>2</sub>(x<sub>1</sub>, ..., x<sub>n</sub>) - λg<sub>2</sub>(x<sub>1</sub>, ..., x<sub>n</sub>) = 0
+      - ... 
+      - f<sub>n</sub>(x<sub>1</sub>, ..., x<sub>n</sub>) - λg<sub>n</sub>(x<sub>1</sub>, ..., x<sub>n</sub>) = 0
+      - Thus, derivative of **f = c - g(x<sub>1</sub>, ..., x<sub>n</sub>)**
+    - **Constrained** Max of L function
+      - Max U(x<sub>1</sub>, x<sub>2</sub>)
+      - Constrain: p<sub>1</sub>x<sub>1</sub> + p<sub>2</sub>x<sub>2</sub> = I
+        - L = U(x<sub>1</sub>, x<sub>2</sub>) + λ(I - p<sub>1</sub>x<sub>1</sub> - p<sub>2</sub>x<sub>2</sub>)
+        - derivative respective to x<sub>1</sub> = U<sub>1</sub>(x<sub>1</sub>, x<sub>2</sub>) - λp<sub>1</sub> = 0
+        - derivative respective to x<sub>2</sub> = U<sub>2</sub>(x<sub>1</sub>, x<sub>2</sub>) - λp<sub>2</sub> = 0
+        - Combine these two equations, we have
+          - U<sub>1</sub>(x<sub>1</sub>, x<sub>2</sub>)/p<sub>1</sub> = U<sub>2</sub>(x<sub>1</sub>, x<sub>2</sub>)/p<sub>2</sub>

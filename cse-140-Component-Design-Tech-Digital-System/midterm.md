@@ -127,24 +127,30 @@
           - a'b'cde and abc'd'e' are not adjacent because their consensus is an **empty set**
       - Two-variable function 
         - `f(A,B)`
+            
             |     | B=0  | B=1 |
             |-----|------|-----|
             | A=0 | A'B' | A'B |
             | A=1 | AB'  | AB  |
+
         - output table
+            
             |     | B=0  | B=1 |
             |-----|------|-----|
             | A=0 | 0 | 1 |
             | A=1 | 1  | 1 |
+            
         - Row A=1 is true and Column B=1 is true, so `f(A,B)=A+B`
         - For 2-variable functions, have 2 variables, 4 entries, 4 combinations
         - For n-variable functions, have n variables, 2<sup>n</sup> entries, 2<sup>n</sup> combinations
       - Three-variable function
         - `f(a,b,c)`
+            
             |     | (0,0) | (0,1) | (1,0) | (1,1) |
             |-----|-------|-------|-------|-------|
             | c=0 | 0,1   | 2,1   | 6,1   | 4,1   |
             | c=1 | 1,0   | 3,0   | 7,0   | 5,0   |
+
         - So `f = c'` because `c=0` row has all true values
         - Note: adjacency applies here
           - m<sub>0</sub>, and m<sub>4</sub>, m<sub>1</sub> are adjacent
@@ -163,12 +169,14 @@
           - A PI that has **an element in on-set F** but is **not covered** by any other PIs
       - Four-variable function
         - `f(a,b,c,d)`
+          
           | cd&ab | 00 | 01 | 10 | 11 |
           |-------|----|----|----|----|
           | 00    | 1  | 0  | 0  | 1  |
           | 01    | 0  | 1  | 0  | 1  |
           | 10    | 1  | 1  | 0  | 0  |
           | 11    | 1  | 1  | 0  | 1  |
+
         - Procedure for finding the minimal function via K-maps
           1. Convert truth table to K-map
           2. Group the adjacent ones: include the largest number of adjacent ones(Prime)
