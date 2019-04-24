@@ -71,12 +71,12 @@
 ## **Casusality and Causal Model**
 -correlation doesn't mean causuality, causuality sometimes don't display in correlation since correlation captures relationship in degree one.
 -regression alone only establish the correlation or association between 2 variables
-- **Bivariate Case**
+- **Bivariate Case(active prediction)**
   - steps:
     1. set x to each of its possible values
     2. let y respond freely without any further intervention
-    3. todo
-    4. todo
+    3. We observe that y takes a unique value for each setting of x (setting: a particular value that x takes)
+    4. We ask: does y take different values for different x? If yes, then x causes y. Otherwise, x does not cause y.
 
   - definition
     - let `c(x)` be the unique value of y for each x
