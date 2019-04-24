@@ -32,8 +32,8 @@
   - Note: **Function defines exactly one output value for unique input values, and must include all input possibilities.**
 - ### Handy tools
   - **Basic Properties**
-    ![Drag Racing](property-of-king.png)
-    ![Drag Racing](more-property.png)
+    - ![Drag Racing](property-of-king.png)
+    - ![Drag Racing](more-property.png)
   - **Demorgan's Theorem**
     - `Y = (AB)' = A' + B'`
     - `Y = (A + B)' = A'B'`
