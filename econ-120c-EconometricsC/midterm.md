@@ -63,56 +63,21 @@
   - def: **As the sample size gets large enough, sampling distribution becomes almost Normal regardless of the shape of the population**
   - When the sample is large enough, the distribution of is very close to a Normal distribution
   - X_bar ~ N(µ, σ<sup>2</sup> / n)
-  - for the t-stats, we have **Z<sub>n</sub> = (X_bar - µ) / (σ/√n)**
-    - example 
-      - Suppose that ACT score in a recent year had the distribution with mean µ = 18.6 and standard deviation σ = 5.9
-      - Now take a SRS of 50 students who took the test. What are the mean and standard deviation of the sample mean score X_bar of these 50 students?
-      - What is the probability that the mean score of these students is 21 or higher?
-      - Soln:
-        - Mean = 18.6
-        - Standard Deviation: 0.8344 (5.9/√50)
-        - P(X_bar ≥ 21) = P(Z ≥ (21 - 18.6) / 0.834) = P(Z ≥ 2.8778)
-        - = 1 - P(Z < 2.88) = 0.2%
-        - About 0.2 % of all random samples of size 50 would have a mean score of 21 or higher.
-- ### **Asymptotic Distributions OSL Estimators**
-  - Review: **ß_hat = ß + cov(X, u)/var(X)**
---- 
-## **Introduction to Causal Inference**
-- Why do we care about ß in OLS? Because we can use it to predict the future
-- **Passive Prediction**
-  - To predict the future, we are the **passive observer** and we do not control the changes in the predictors
-  - If we **observe** that more people are carrying umbrellas, then we predict that it is more likely to rain
-- **Active Prediction**
-  - To predict the effect of interventions, we are the **active participant**
-  - If we **force** more people to carry umbrellas, would this change the probability of raining
-- Note: **Correlation Does NOT imply Causation (more details in [OLS explaination](https://github.com/yeelimtse/UCSD-review-docs/blob/master/others/What%20is%20OLS.md))**
-  - Example: Hot chocolate
-    - A strong correlation has been found in a certain city in the northeastern United States between **weekly sales of hot chocolate** and **weekly sales of facial tissues**
-    - If you regress weekly sales of facial tissues on weekly sales of hot chocolate, you find a statistically significant relationship
-    - But Does this mean *hot chocolate causes people to need facial tissues*? **NOT NECESSARY**
-  - Another Example: TV
-    - Rich nations have more TV sets
-    - Rich nations have longer life expectancies because of better nutrition, clean water, and health care
-    - **But There is no cause-and-effect tie between TV sets and length of life**
-    - Note: **data from an observational study, in the absence of any other evidence, simply cannot be used to establish causation.**
-  - A reasonable correlation would be the following
-    - In terms of `X is the direct cause of Y`, `X → Y`
-      1. X: Amount of fertilizer; Y: yield of corn
-      2. X: Weight of a car; Y: Mileage per Gallon
-      3. X: Dosage of a drug; Y: the survival rate of the mice
-    - Mutual Causality
-      - X = advertising expenditures and Y = occupancy rates for hotels
-      - X = Police Spending Y = Crime Rate
-  - In conclusion
-    - A correlation between two variables X and Y can reflect many types of relationship among X, Y, and one or more omitted variables
-    - A correlation between a predictor X and a response Y, even if it is very strong, is not by itself good evidence that changes in X actually cause changes in Y
+  - for the t-stats, we have **Z<sub>n</sub> = √n (X_bar - µ) / (σ ~ N(0, 1))**
+  -  t-stats is a sample statsitics hence it is a random varialble(so does p-value)-->sampling distribution for both t-stats 
+     and p-value
+  - The value of the t-statistic we obtain for the sample at hand is one draw from its sampling distribution.
+- ### **Asymptotic  Distributions OSL Estimators**
+- as sample size gets large, the variance of OLS estimator decrease at a rate of 1/n
 ## **Casusality and Causal Model**
-- **Bivariate Case**
+-correlation doesn't mean causuality, causuality sometimes don't display in correlation since correlation captures relationship in degree one.
+-regression alone only establish the correlation or association between 2 variables
+- **Bivariate Case(active prediction)**
   - steps:
     1. set x to each of its possible values
     2. let y respond freely without any further intervention
-    3. observe that y takes a unique value for each setting of x 
-    4. ask: does y take different values for different x? If yes, then x causes y. Otherwise, x does not cause y.
+    3. We observe that y takes a unique value for each setting of x (setting: a particular value that x takes)
+    4. We ask: does y take different values for different x? If yes, then x causes y. Otherwise, x does not cause y.
   - definition
     - let `c(x)` be the unique value of y for each x
     - we call `c(x)` the response function
