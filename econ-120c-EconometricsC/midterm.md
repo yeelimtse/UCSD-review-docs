@@ -63,10 +63,14 @@
   - def: **As the sample size gets large enough, sampling distribution becomes almost Normal regardless of the shape of the population**
   - X_bar ~ N(µ, σ<sup>2</sup> / n)
   - for the t-stats, we have **Z<sub>n</sub> = √n (X_bar - µ) / (σ ~ N(0, 1))**
-  - 
+  -  t-stats is a sample statsitics hence it is a random varialble(so does p-value)-->sampling distribution for both t-stats 
+     and p-value
+  - The value of the t-statistic we obtain for the sample at hand is one draw from its sampling distribution.
 - ### **Asymptotic  Distributions OSL Estimators**
-
+- as sample size gets large, the variance of OLS estimator decrease at a rate of 1/n
 ## **Casusality and Causal Model**
+-correlation doesn't mean causuality, causuality sometimes don't display in correlation since correlation captures relationship in degree one.
+-regression alone only establish the correlation or association between 2 variables
 - **Bivariate Case**
   - steps:
     1. set x to each of its possible values
