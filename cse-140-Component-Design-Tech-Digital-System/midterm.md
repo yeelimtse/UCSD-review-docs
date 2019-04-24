@@ -180,6 +180,10 @@
           - An implicant that is **not covered** by any other implicants
         - Essential PI
           - A PI that has **an element in on-set F** but is **not covered** by any other PIs
+        - **Note: Procedure of Finding Minimal POSs or SOPs**
+          1. Find out all Essential PIs, fix the circles for those 1s
+          2. For the rest 1s, find all possible PIs for each 
+          3. The combinations of the PIs for each left 1s will be the final answer
       - Four-variable function
         - `f(a,b,c,d)`
           

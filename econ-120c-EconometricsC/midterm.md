@@ -1,8 +1,9 @@
 # **ECON 120C**
 ---
-## Lecture 1
-- Random Variable
-- Sampling
+## Sampling, Law of Large Numbers, and Consistency of OSL estimator
+- ### Random Variable
+  - def: *a variable whose value is a numerical outcome of a random phenomenon*
+- ### Sampling
   - def: *Sampling is the process of taking a smaller group of subjects from a larger population*
   - simple random sample
     - everybody has an equal chance to be selected
@@ -10,37 +11,42 @@
       - population parameter
         - def: *A numerical quantity that describes some characteristic of a population*
         - example: *Mean*
-
       - Sample statistic
         - def: *A numerical quantity that describes some characteristic of the sample*
-
-
+        - example: *Average*
 - Sample statistic is a random variable
   - another sample --> different sample statistics
   - new data --> histogram of all of the values of the statistic
   - histogram --> estimator of the sampling distribution
-
-
+  - it provides information about **amount of variation and the nature of the variation**
 - Approximating the Sampling Distribution
   1. whether the sampling distribution becomes more concentrated as the sample size increases. If yes, what is the point of concentration (**LLN**)
   2. The shape of the sampling distribution as the sample size increases (**CLT**)
-
 - **The Law of Large Numbers (LLN)**
   - draw *independent* observations at *random* from any population with finite mean µ
-  - let n be the sample size. As n gets larger, `X_bar -> µ`
+  - let n be the sample size. As n gets larger, `X_bar -> µ` \(test \cdot test\)
   - **Averages Approximate Expectations**
   - **Sample Statistics Approxiamte Population Statistics**
-
 - **OLS**
   - `1/n * ∑(X_i = X_1 + X_2 + X_3 + ...)`
   - Covariance Rules
+    1. If \(Y=V+W\), cov(X,Y) = cov(X,V) + cov(X,W)
+    2. If \(Y=bZ\), where b is a constant, cov(X,Y) = bcov(X,Z)
+    3. If \(Y=b\), where b is a constant, cov(X,Y) = 0
   - Variance Rules
-  - `Y_i = a + X_i * beta + u_i`
-  - `beta = cov(X, Y) / var(X, Y)`
-  - `cov(X, Y) / var(X) = beta + cov(X, u) / var(X)`
-
+    1. If \(Y=V+W\), var(Y) = var(V) + var(W) + 2cov(V,W)
+    2. If \(Y=bZ\), where b is a constant, var(Y) = b<sup>2</sup>var(X,Z)
+    3. If \(Y=b\), where b is a constant, var(Y) = 0
+    4. If \(Y=V+b\), where b is a constant, var(Y) = var(V)
+  - In OLS, we have
+    - **Y<sub>i</sub> = a + X<sub>i</sub> * beta + u<sub>i</sub>**
+    - **beta = cov(X, Y) / var(X, Y)**
+    - **cov(X, Y) / var(X) = beta + cov(X, u) / var(X)**
+    - Note: 
+      - *as sample size increases, ß becomes arbitrarily close to ß(real ß)*
+      - *ß in our OLS estimator is denoted as ß_hat*
 ---
-## Lecture 2
+## Sampling, Law of Large Numbers, and Consistency of OSL estimator (continue)
 - ### **Sample Distribution**
   - distribution of sample **X_bar** can be very **different** than that of the population **µ**
   - As the sample size **increases**, the variance of X_bar **decreases**
