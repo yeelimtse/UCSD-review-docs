@@ -121,3 +121,69 @@
       - Therefore, have two different slopes, 
         - slope1 = -2
         - slope2 = -6/5
+  - **Unconstrained** Optimization
+    - Want to MAX `f(x1, x2, ..., xn)`
+    - Then 
+      - f<sup>(1)</sup>(x1, ...) = 0, derivative of x<sub>1</sub>
+      - f<sup>(2)</sup>(x1, ...) = 0, derivative of x<sub>2</sub>
+      - f<sup>(3)</sup>(x1, ...) = 0, derivative of x<sub>3</sub>
+      - etc...
+    - Example
+      - Max `(x1+2x2)(6-2x1-x2)`
+      - f<sup>(1)</sup>(x<sub>1</sub>, ...) = 6 - 4x<sub>2</sub>-x<sub>2</sub>-4x<sub>1</sub> = 0
+      - f<sup>(2)</sup>(x1, ...) = 12 - 4x<sub>1</sub> - 4x<sub>2</sub> - x<sub>1</sub> = 0
+      - 4x<sub>1</sub>+5x<sub>2</sub> = 6
+      - 5x<sub>1</sub>+4x<sub>2</sub> = 12
+      - x<sub>1</sub> = 4
+      - x<sub>2</sub> = -2
+  - **Constrain** Optimization
+    - Max f(x<sub>1</sub>, x<sub>2</sub>), with constrain **g(x<sub>1</sub>, x<sub>2</sub>) = c**
+    - level curves of f, there are infinitely many level curves, but only one that can **MAX**
+    - When level curve is MAX, the constrain has to be tangent to the level curve of the function
+    - slope: **-g<sub>1</sub>(x<sub>1</sub>, x<sub>2</sub>)/g<sub>2</sub>(x<sub>1</sub>, x<sub>2</sub>)** = **-f<sub>1</sub>(x<sub>1</sub>, x<sub>2</sub>)/f<sub>2</sub>(x<sub>1</sub>, x<sub>2</sub>)**
+      - This means that there exists some **scalar λ such that**
+      - **λg<sub>1</sub>(x<sub>1</sub>, x<sub>2</sub>) = f<sub>1</sub>(x<sub>1</sub>, x<sub>2</sub>)** and **λg<sub>2</sub>(x<sub>1</sub>, x<sub>2</sub>) = f<sub>2</sub>(x<sub>1</sub>, x<sub>2</sub>)**
+    - For cases of multiple variables, if want to Max f(x<sub>1</sub>, ..., x<sub>n</sub>) such that g(x<sub>1</sub>, ..., x<sub>n</sub>) = c, the solution (x<sub>1</sub>*, ..., x<sub>n</sub>*) should satisfy that 
+      - f<sub>1</sub>(x<sub>1</sub>, ..., x<sub>n</sub>) = λg<sub>1</sub>(x<sub>1</sub>, ..., x<sub>n</sub>)
+      - etc.
+- ### **Lagrangian Function**
+  - **L(x<sub>1</sub>, ..., x<sub>n</sub>, λ) = f(x<sub>1</sub>, ..., x<sub>n</sub>) + λ(c-g(x<sub>1</sub>, ..., x<sub>n</sub>))**
+  - λ is a **Lagrangian Multiplier**
+    - **Unconstrained** Max of L function
+      - f<sub>1</sub>(x<sub>1</sub>, ..., x<sub>n</sub>) - λg<sub>1</sub>(x<sub>1</sub>, ..., x<sub>n</sub>) = 0
+      - f<sub>2</sub>(x<sub>1</sub>, ..., x<sub>n</sub>) - λg<sub>2</sub>(x<sub>1</sub>, ..., x<sub>n</sub>) = 0
+      - ... 
+      - f<sub>n</sub>(x<sub>1</sub>, ..., x<sub>n</sub>) - λg<sub>n</sub>(x<sub>1</sub>, ..., x<sub>n</sub>) = 0
+      - Thus, derivative of **f = c - g(x<sub>1</sub>, ..., x<sub>n</sub>)**
+    - **Constrained** Max of L function
+      - Max U(x<sub>1</sub>, x<sub>2</sub>)
+      - Constrain: p<sub>1</sub>x<sub>1</sub> + p<sub>2</sub>x<sub>2</sub> = I
+        - L = U(x<sub>1</sub>, x<sub>2</sub>) + λ(I - p<sub>1</sub>x<sub>1</sub> - p<sub>2</sub>x<sub>2</sub>)
+        - derivative respective to x<sub>1</sub> = U<sub>1</sub>(x<sub>1</sub>, x<sub>2</sub>) - λp<sub>1</sub> = 0
+        - derivative respective to x<sub>2</sub> = U<sub>2</sub>(x<sub>1</sub>, x<sub>2</sub>) - λp<sub>2</sub> = 0
+        - Combine these two equations, we have
+          - U<sub>1</sub>(x<sub>1</sub>, x<sub>2</sub>)/p<sub>1</sub> = U<sub>2</sub>(x<sub>1</sub>, x<sub>2</sub>)/p<sub>2</sub>
+## **Review**
+1. Describe all points where MRS of **x<sub>1</sub>x<sub>2</sub><sup>2</sup>** is -1.
+ - **Answer:**
+   - **MRS = -x<sub>2</sub><sup>2</sup>/(2x<sub>1</sub>x<sub>2</sub>) = -x<sub>2</sub>/x<sub>1</sub> = -1**
+2. A consumer spends `$72` on a good when the price of this good is `$6`. When its price increases to `$8`, the consumer spend $64 on it. What is the price elasticity of demand?
+ - **Answer:**
+    - Denote that both the P and Q have changed, to calculate the price elasticity between two points, we need to calculate the percentage change
+    - Given point `(72, 72/6), and (64, 64/8)`
+    - We know the origin Q is 72/6 = 12, and the current Q' is 64/8 = 8. `%delta of Q = (8 - 12)/12 = -1/3`
+    - P = 6, and P' = 8. `%delta of P = (8 - 6)/6 = 1/3`
+    - By the definition of elasticity, we have `e = %delta of Q / %delta of P = -1`
+3. A person have income `I=24`, and price of good 1 is $3. Note that a consumer needs to pay `$12` to get 7 units of good 2, and `$2` for each additional unit of good 2. Graph the budget constrain and label all important points.
+  - **Answer:**
+    - ![p3-graph](econ-100a-review-problem3.png)
+4. Given **min(x<sub>1</sub>/a, x<sub>2</sub>/b)** is indifferent between `(10, 5)` and `(15, 5)`. What can you say about coefficient `a and b`?
+  - **Answer:**
+    - ![p4-graph](econ-100a-review-problem4.png)
+    - Based on our calculation, given `C/a = 5/b` and `C ≤ 10`, we have
+    - `C = 5a/b`, plug `C ≤ 10` in, then we have
+    - `5a/b ≤ 10`, so the eventual relation is `a ≤ 2b`
+5. Given Utility = MT1 + min(MT1, MT2), graph indifferent curve.
+  - **Answer:**
+    - Naive Procedure: *plot multiple points such as (0, 1), (0, 5), (0, 10), etc, and find out the pattern*
+    - ![p5-graph](econ-100a-review-problems.png)
