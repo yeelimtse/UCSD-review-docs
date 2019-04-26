@@ -186,3 +186,11 @@
   - **Answer:**
     - Naive Procedure: *plot multiple points such as (0, 1), (0, 5), (0, 10), etc, and find out the pattern*
     - ![p5-graph](econ-100a-review-problems.png)
+## **Practice Midterm-1**
+1. todo
+2. todo
+3. todo
+4. todo
+5. In the Potions class at Hogwarts School of Witchcraft and Wizardry there are two midterms, each out of 50 points. To get the Önal class score, the following procedure is applied: if the di§erence between the midterm scores is less than or equal to 10, then the Önal score is the maximum of the two midterms. If the di§erence between the midterm scores is greater than 10, then the Önal score is the average of the two midterms. In the space below, draw the indi§erence curves for the midterm scores. To get the full credit, you need to draw all possible shapes that exist here. Put MT1 score on the horizontal axis. Label all important points.
+- **Answer:**
+  - ![p5-graph](econ-100a-practicemt5.png)

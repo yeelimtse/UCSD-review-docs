@@ -3,6 +3,7 @@
 - Definition
   - How many units of good x have to be given up in order to gain an **extra** unit of good y while keeping the same level of utility
   - The equation is **MRS<sub>xy</sub> = -dy/dx = MU<sub>x</sub>/MU<sub>y</sub>**
+  - **MU** here is the marginal utility function, in econ 100A in UCSD, we only consider MUs that take two **commodities** (inputs or variables)
 - Example 1
   - U = x<sup>2</sup> + y<sup>2</sup>
   - U<sub>x</sub>' = 2x > 0
@@ -19,5 +20,26 @@
     - In such case, the vertical fragment of each indifference curve has an infinite MRS
     - The horizontal fragment has a MRS of 0
     - As a result, an increase in the consumers utility will only come when the addition of one unit of one good comes along with the same increase of the other good
+- **Law of Dminishing MRS or MU**
+  - For each additional unit of good gained, the utility of it is less than that of the last gained good.
+  - How to interpret this law?
+    - You can think of eating an apple. Let's say one day you want to eat an apple real bad, the level of desiring to eat an apple is 100. After you ate one, you are happy but still not satisfied, and your level of desire now is 80. So you ate another apple, and you feel half full but can still eat more, now your level of desire has decreased to 60. After you ate the 4th apple, you feel full and you do not want any more apples now, and then your level of desire is 40. 
+    - Here the level of desire is like the marginal utility. The more apple you ate, the less likely you want to continue to eat.
+    - In other words, the additional apple is less and less attractive to you as you eating more and more.
+- Some problems might want to consider
+  - The utility function of a consumer U(x<sub>1</sub>, x<sub>2</sub>) has strictly diminishing MRS. The consumer currently consumes the bundle (50, 50), at which MRS is `-2`. Now, will this consumer be willing:
+    - *to trade 20 units of x<sub>1</sub> in exchange for 20 units of x<sub>2</sub>?*
+      - Note that MRS is -2, which means the consumer now is willing to give up 1 unit of good 1 for 2 units of good 2.
+      - Since the utility function of this consumer has **strictly diminishing MRS**, for each 1 unit of good 1 this consumer gives up, he or she will demand x units of good 2, where x ≥ 2 and x is increasing as more good 1's are given away.
+      - If two goods are perfect substitutes, MRS is constant, being `-2`. Then giving up 20 units of good 1 and gainning 40 units is **acceptable**
+      - However, (30, 70) is for sure not acceptable. Therefore, this consumer will not do this trade.
+    - *to trade 20 units of x<sub>2</sub> in exchange for 20 units of x<sub>1</sub>*
+      - For this the answer is **we do not know**
+      - If two goods are perfect substitutes, then (70, 30) is preferred over (50, 50).
+      - If two goods are perfect complements, then (70, 30) is **NOT** preferred over (50, 50).
+  - What can you say about the **indifference** **curve** if MRS at any bundle (x<sub>1</sub>, x<sub>2</sub>) only depends on the consumption level of x<sub>1</sub>?
+    - This means that the slope of the indi§erence curve also depends only on x1 and not on x2. 
+    - This is a feature of the indi§erence curves that are parallel to each other (in the direction of x2)
+    - which means that the consumer preferences are quasilin
 - Sum up
   - The MRS measures the trade-offs goods when analyzing utility
