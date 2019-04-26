@@ -94,14 +94,13 @@
         - u(q<sub>1</sub>, q<sub>2</sub>) = √q<sub>1</sub> + q<sub>2</sub>
         - u(q<sub>1</sub>, q<sub>2</sub>) = ln(q<sub>1</sub>) + q<sub>2</sub>
       - MRS = -(u'(q<sub>1</sub>)/1) = -u'(q<sub>1</sub>)
-
+      - A more detailed MRS explaination is [here](https://github.com/yeelimtse/UCSD-review-docs/blob/master/others/What%20is%20MRS.md)
 - ### **Quasilinear Preferences**
   - u(q<sub>1</sub>, q<sub>2</sub>) = q<sub>1</sub> + u(q<sub>2</sub>)
   - MRS = MRS = -1/u'(q<sub>2</sub>), depends on q<sub>2</sub> only
   - Consumer preferences
     - A, B are two consumers
     - todo
-
 - ### **Budget Constrain**
   - budget I, price p1 and p2
   - bundle (q1, q2) is feasible if p1\*q1 + p2\*q1 ≤ I(ncome)

@@ -1,0 +1,23 @@
+# **What is MRS**
+- MRS stands for **Marginal Rate of Substitution**
+- Definition
+  - How many units of good x have to be given up in order to gain an **extra** unit of good y while keeping the same level of utility
+  - The equation is **MRS<sub>xy</sub> = -dy/dx = MU<sub>x</sub>/MU<sub>y</sub>**
+- Example 1
+  - U = x<sup>2</sup> + y<sup>2</sup>
+  - U<sub>x</sub>' = 2x > 0
+  - U<sub>y</sub>' = 2y > 0
+  - So |MRS| = 2x/2y = x/y
+- Example 2
+  - U = xy
+  - U<sub>x</sub>' = y
+  - U<sub>y</sub>' = x
+  - So |MRS| = y/x
+- Some edge cases
+  - When both goods are perfect substitutes, the MRS will remain constant
+  - When two goods are complementary goods, the indifference curve will be "L" shape
+    - In such case, the vertical fragment of each indifference curve has an infinite MRS
+    - The horizontal fragment has a MRS of 0
+    - As a result, an increase in the consumers utility will only come when the addition of one unit of one good comes along with the same increase of the other good
+- Sum up
+  - The MRS measures the trade-offs goods when analyzing utility
