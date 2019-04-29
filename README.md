@@ -1,4 +1,4 @@
-# UCSD-review-docs
+# UCSD Review Docs
 ## **What is this?**
 This repository includes notes of all of UCSD courses we have taken so far. These notes/review docs are mostly based on course content, piazza questions, past exams, and homeworks, and a little bit further related knowledge in ['other' folder](https://github.com/yeelimtse/UCSD-review-docs/tree/master/others).
 
