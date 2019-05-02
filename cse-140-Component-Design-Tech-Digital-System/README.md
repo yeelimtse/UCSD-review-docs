@@ -236,6 +236,65 @@
 ---
 ## **Sequential Nerworks (Midterm 2)**
 - **memory** + **time steps (Clock)**
+### **Introduction**
+- Sequential circuits
+  - def: *A circuit whose output depends on current inputs and past outputs* (A circuit with memory)
+  - Key features
+    - memory: flip flops
+    - specification: finite state machines
+    - implementation: excitation tables
+    - main theme: timing
+      - present time: `t`, next time: `t+1`
+- Memory heirarchy
+  - different types: smallest to largests
+    - register/latches
+    - register file (static memory - SRAM)
+    - Cache memory (static memory - SRAM)
+    - Main memory (Dynamic Memory - DRAM)
+    - NVM Main memory (Non-volatile memory - e.g. Flash)
+    - Disk
+  - Trade-off between size and speed. **Smaller, faster.**
+  - Size relates to 
+    - storage density (area/bit)
+    - power (power/bit)
+- Basic Mechanism of Memory
+- ![Drag Racing](fundamental-memory-mechanism.png)
+  - Capacitive Loads
+  - these two circuits are essentially the same.
+  - Two outputs: Q and Q_bar
+  - There is a feedback loop
+    - in a typical combinational logic, there is no feedback loop
+  - No inputs
+  - Two possible cases for this circuit
+    - Q = 1, Q' = 0
+    - Q = 0, Q' = 1
+  - Bistable circuit stores 1 bit of state in the state variable, Q (or Q')
+  - Hold the value due to capacitive charges and feedback loop strengthening
+  - But **there are no inputs to control the state**
+  - Given a memory component made out of a loop of inverters, the number of inverters in the loop has to be **even** (in order to keep consistency)
+### **Basic Building Blocks**
+- Latch
+  - example: flight attendant call button
+  - ![a](SR-latch.png)
+    - press call: light turn on, stays on after button released
+    - press cancel: light turns off
+    - SR latch implementation
+      - call=1, sets Q to 1 and keeps it at 1
+      - cancel=1, resets Q to 0
+    - All possible cases
+      - `S = 1, R = 0`
+      - `S = 0, R = 1`
+      - `S = 0, R = 0`
+      - `S = 1, R = 1`
+    - ![a](SR-latch2.png)
+    - The truth table will be 
+    - ![a](SR-truthtable.png)
+    - The state table will be 
+    - ![a](SR-statetable.png)
+    - The state diagram will be 
+    - ![a](SR-statediagram.png)
+    - Tangling problem exists (state `11`)
+### **Implementation**
 ---
 ## **Data Path Subsystem (Final)**
 ---
