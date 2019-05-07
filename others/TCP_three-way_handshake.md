@@ -1,7 +1,7 @@
 # **TCP Three-Way Handshake Explained**
 - When a user tries to connect to a website, TCP three-way handshake happens behind the scene. The server side typically refers to the webiste, and client side refers to the user who sends the request.
 - **server side** has the following methods
-  - socket()
+  - socket() - *Note websocket is a new feature in html5*
   - bind()
   - listen()
   - **accept()**
@@ -51,3 +51,9 @@
   - `s -- ACK: ACK = x + 3 --> c`
   - `s -- FIN: sequence = y + 1 --> c`
   - `c -- ACK: ACK = y + 2 --> s`
+
+# **What happened behind the scenes when you type in an URL and when the web finishes loading?**
+1. The browser will create a thread to deal with your request of this URL. It corresponds to a DNS look up remotely, such that the browser knows what the IP address is.
+2. TCP three-way handshake happens to build up the connection between the client and server.
+3. Once the connection is built, the browser will send HTTP requests such as `GET` to request resources from server and the server will return the corresponding resources back to user. 200 is a success status code (request successful).
+4. The client side starts to download the data and resources.
