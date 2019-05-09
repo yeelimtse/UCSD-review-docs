@@ -296,6 +296,54 @@
     - Tangling problem exists (state `11`)
 ### **Implementation**
 ---
+## **Standard Modules**
+### **Part III - Standard Combinational Modules**
+### Introduction
+### Decoder
+- def: *A digital module that converts a binary **address** to the assertion of the addressed **device***
+  - N inputs, 2<sup>N</sup> outputs
+  - **One-hot outputs: only one output HIGH at most**
+- Logic Diagram: TODO
+- Application
+  - Decoder produces **minterms** when E = 1
+  - Universal set: {Decoder, OR}
+  - Example
+    - F1(a, b, c) = ∑m(1, 2, 4) + ∑d(0, 5)
+    - F2(a, b, c) = ∑m(2, 3) + ∑d(1, 4)
+    - F3(a, b, c) = ∑m(0, 5, 6)
+- Tree of Decoders
+  - Scale up the size of decoders using a tree structure
+  - Using one decoder to select children decoders
+  - Example
+    - when input `a = 1`, select decoder 1; otherwise select decoder 2.
+    - More specifically, implement a 4-2<sup>4</sup> with 3-2<sup>3</sup> decoders
+    - Implement a 6-2<sup>6</sup> with 3-2<sup>3</sup> decoders
+      - 3 inputs to decode 8 different decoders, each of which also has 3 inputs
+### Encoder
+- def: *A digital module that converts the assertion of a device to the binary address of the device.*
+  - At most one I<sub>i</sub> = 1.
+  - (y<sub>n-1</sub>, ..., y<sub>0</sub>) = 1 if I<sub>i</sub> = 1 & E = 1
+  - (y<sub>n-1</sub>, ..., y<sub>0</sub>) = 0 otherwise
+  - A = 1 if E = 1, and one i such that I<sub>i</sub> = 1
+  - A = 0 otherwise
+- Logic Diagram: TODO
+- Priority Encoder: TODO
+### Multiplexer (Mux)
+- def: *A digital module that selects one of data inputs according to the binary address of the selector.* 
+  - If E = 1
+    - y = D<sub>i</sub> where i = (S<sub>n-1</sub>, ..., S<sub>0</sub>)
+  - Else
+    - y = 0
+  - Selects between one of N inputs to connect to the output
+  - log<sub>2</sub>N-bit select input - control input
+- Logic Diagram
+- Application
+  - Universal Set: {Mux}
+    - Use selector to decompose the function into smaller functions, which follows **Shannon's Expression**
+    - Simplify the decomposed functions using K-map, which follows **consensus theorem**
+  - Building Blocks of FPGA (Field Programmable Gate Array)
+### Demultiplexier (DeMux)
+---
 ## **Data Path Subsystem (Final)**
 ---
 ## **Control Subsystem (Final)**
