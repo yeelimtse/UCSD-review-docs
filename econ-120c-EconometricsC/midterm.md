@@ -223,3 +223,55 @@
 - randomization
   - `Y = å+Xß+u`
   - X is randomly assigned
+- IV estimation
+  - Motivation
+    - When `cov(x, u)` is not zero, a simple OLS estimator of the causal effect of X on Y would be **inconsistent**. 
+    - We need to separate "clean" variables that may be correlated with u.
+      - "chance": clean random element c: cov(c, u) = 0
+      - "choice": unclean random element c': cov(c', u) ≠ 0
+    - To separate, we need to include an **instrumental variable Z** with certain key properties.
+      - cov( Z , X ) ≠ 0 (relevance)
+      - cov(Z , u ) = 0 (**exogeneity**)
+      - **Instrumental exogeneity = Exclusion + Independence**
+        - Exclusion Restriction
+          - Z can affect Y only through X.
+          - Z can not affect Y through u.
+        - Independence Assumption
+          - u can not cause Z
+    - We use IV as a tool to tease out the **uncorrelated** componenet of X
+    - IV is different from **causal factors** as it is correlated with Y but has no **causal effect** on Y. It can only affect Y trhough shifting X.
+  - Basic Ideas
+    - Any part of X that depends on Z **only** must also be uncorrelated with u
+    - It helps us find a part of X that behaves as though it had been randomly assigned
+    - The causal effect can be then consistently estimated using only “the part of X” that appears to be randomly assigned
+    - More specifically, when Z causes X, we can illustrate the basic IV idea as follow:
+        - If we induce a unit change in Z, then X will change by some units
+        - u will not because cov(Z, u) = 0
+        - Y will change in response to the change in X
+        - Such a change in Y has a **causal interpretation**
+          - *The effect of X on Y while keeping all else constant.*
+  - Two Examples
+    1. Demand for Cigarettes
+       - Suppose we want to estimate the response of market demand for Cigarettes to **exogenous** changes in market price
+       - Quantity demanded clearly depends on `Price`, but `Price` is not **exogenously** given since it is determined in part by market demand (u partly determines Price and so Cov(Price, u)≠0)
+       - Because Price is endogenous, we need an instrumental variable. Which of the two variables would be suitable?
+         - Each state’s cigarette excise tax
+           - correlated with the (total) cigarette price (X)
+           - However, it also reflects the level of anti-smoking sentiment in the state (u). 
+           - Thus, cigarette excise tax is **NOT** a valid IV.
+         - General Sales Tax
+           - correlated with the (total) cigarette price (X)
+           - There is no reason to expect the general sales tax to be correlated with any other determinant of cigarette demand.
+           - Thus, General Sales Tax is a **valid IV**.
+    2. Returns to Education
+       - We want to estimate the returns to **exogenous** changes in schooling
+       - Most observational data sets lack measures of individual ability, which becomes part of u. So `Cov(Years_of_schooling, u) ≠ 0`
+       - Because `Years_of_schooling` is endogenous, we need an instrument Z that is correlated with schooling, uncorrelated with ability and that, more generally, it cannot directly determine earnings.
+       - Which of the two variables would be suitable?
+         - Distance to a College
+           - correlated with years of schooling (X) as people whose home is a long way from a college or university are less likely to attend college
+           - In terms of whether it is exogenous or not, **most likely**, but it can be argued that people who live a long way from a college are more likely to be in low-wage labor markets
+         - Month of Birth
+           - correlated with years of schooling (X) because it  determines age of first entry into school, which in turn may affect years of schooling due to laws that specify a minimum school leaving age
+           - *However, the correlation between the two is very small. This can be problematic (weak instrumentation)*
+           - In terms of whether it is exogenous or not, **YES** because there is no reason to believe that “month of birth” has a direct effect on earnings.
