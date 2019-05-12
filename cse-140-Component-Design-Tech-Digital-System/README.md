@@ -295,6 +295,90 @@
     - ![a](SR-statediagram.png)
     - Tangling problem exists (state `11`)
 ### **Implementation**
+### **Timing and Retiming**
+- Motivation
+  - Too late: Fail to reach for the setup of the next state
+  - Too early: Race to disturb the holding of the next state
+  - Gaol: a **Robust** design
+  - A typical sequential network has combinational circuit between registers
+  - The registers are synchronized by clocks
+  - Timing is set between clocks
+- Gate Delay
+  - t<sub>cd</sub>: Min delay of a gate, also called Contamination delay
+    - Minimum time from when an input changes until the output starts to change
+  - t<sub>pd</sub>: Max delay of a gate, also called Propagation delay
+    - Maximum time from when an input changes until the output is guaranteed to reach its final value
+  - Different input transition causes different delay at output
+  - Different path causes different output transition delay
+  - Interconnect Delay
+    - For 5GHz, the clock period is 200 𝑝𝑠/𝑐𝑦𝑐𝑙𝑒.
+- Flip-Flop Timing Window
+  - Timing: Setup Time and Hold Time Constraints
+  - Once a flip flop has been ‘built’ we are stuck with its timing characteristics
+    - t<sub>setup</sub>, t<sub>hold</sub> timing relation between `D and CLK`
+    - t<sub>ccq</sub>, t<sub>pcq</sub> timing relation between `CLK and Q`
+    - Note that **No direct timing relation between input D and output Q**
+    - ![a](setup-hold.png)
+    - t<sub>setup</sub>
+      - Time **before** the clock edge that data must be stable (i.e. not change)
+      - Setup time violation
+        -  occurs if the input signal D does not settle (set up) to the stable value at least t<sub>setup</sub> before the clock edge.
+    - t<sub>hold</sub>
+      -  Time **after** the clock edge that data must be stable
+      -  Hold time violation 
+         -  This occurs if the input signal D does not remain unchanged (hold) for at least t<sub>hold</sub> after the clock edge
+    - ![a](pcq-ccq.png)
+    - **Propagation** delay
+      - t<sub>pcq</sub> = time after clock edge that the output Q is guaranteed to be stable (i.e., to stop changing)
+    - **Contamination** delay
+        - t<sub>ccq</sub> = time after clock edge that Q might be unstable (i.e., start changing)
+- Two Timing Constraints: shortest and longest timing paths
+  - ![a](timing-constrains.png)
+  - t<sub>cp</sub>: time from rising edge of clock to Q update `(CLK1 -> B)`
+  - t<sub>comb</sub>: time of combinational logic delay  `(B -> C)`
+  - t<sub>setup</sub>: setup time before rising edge of clock `(C -> CLK2)`
+  - t<sub>hold</sub>: hold time after the rising edge of clock `(CLK1 -> CLK2)`
+  - **T**: clock period `(CLK1 -> CLK2)`
+  - **SO**
+    - Setup time constraint - Longest delay from CLK1 to CLK2
+      - ![a](setup-const.png)
+    - Hold time constraint - Shortest delay from CLK1 to CLK2
+      - ![a](hold-const.png)
+- Examples
+  - ![a](setup-con-ex.png)
+  - **Setup Time Constraint**
+  - Suppose CLK rises at t1, what is the maximum delay (from t1) after which D2 reaches a stable value
+    - Note that setup time constraint depends on the **maximum** delay from register R1 through the combinational logic
+    - The input to register R2 must be stable at least t setup before the clock edge.
+    - **t<sub>pcq</sub> + t<sub>pd</sub> + t<sub>setup</sub> ≤ T**
+    - **t<sub>pd</sub>** here is all the delays of combinational logics.
+  - ![a](hold-time-cont.png)
+  - **Hold Time Constraint**
+    - **t<sub>hold</sub> < t<sub>ccq</sub> + t<sub>cd</sub>(Comb)**
+- Clock Skews and Retiming
+  - def: 
+    - *The clock doesn’t arrive at all registers at the same time. The difference between two clock edges is skew*
+    - Caused by **p**rocess variation, **v**oltage fluctuation, **c**rosstalks (PVC)
+  - In the worst case, CLK2 is 
+    - Eaerlier than CLK1 for setup time: t<sub>CLK2</sub> = t<sub>CLK1</sub> - t<sub>skew</sub>
+    - Later than CLK1 for hold time: t<sub>CLK2</sub> = t<sub>CLK1</sub> + t<sub>skew</sub>
+    - Then, 
+      - ![a](skew-early.png)
+      - T<sub>c</sub> ≥ t<sub>pcq</sub> + t<sub>pd(Comb)</sub> + t<sub>setup</sub> + t<sub>skew</sub>
+      - ![a](skew-early-hold.png)
+      - t<sub>ccq</sub> + t<sub>cd(Comb)</sub> > t<sub>hold</sub> + t<sub>skew</sub>
+  - Designated Skew
+    - Make skew by design to improve the performance.
+    - t<sub>CLK2</sub> = t<sub>CLK1</sub> + t<sub>skew</sub>
+    - T<sub>c</sub> ≥ t<sub>pcq</sub> + t<sub>pd(Comb)</sub> + t<sub>setup</sub> **-** t<sub>skew</sub>
+    - t<sub>ccq</sub> + t<sub>cd(Comb)</sub> > t<sub>hold</sub> + t<sub>skew</sub>
+    - So, usually when we are considering MIN clock period T, we evaluate the MAX value of t<sub>skew</sub> we can get to make **Hold time constraint** hold.
+    - Examples
+      - T<sub>c</sub> ≥ 215 **-** t<sub>skew</sub>
+      - 30 + 50 ≥ 70 + t<sub>skew</sub>
+      - Then the MIN period T can be 205.
+  - Retiming: 
+    - Adjust the clock skew so that the clock period can be reduced.
 ---
 ## **Standard Modules**
 ### **Part III - Standard Combinational Modules**
