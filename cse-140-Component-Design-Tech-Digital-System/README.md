@@ -387,7 +387,8 @@
 - def: *A digital module that converts a binary **address** to the assertion of the addressed **device***
   - N inputs, 2<sup>N</sup> outputs
   - **One-hot outputs: only one output HIGH at most**
-- Logic Diagram: TODO
+- Logic Diagram
+- ![a](decoder-1.png)
 - Application
   - Decoder produces **minterms** when E = 1
   - Universal set: {Decoder, OR}
@@ -408,10 +409,15 @@
   - At most one I<sub>i</sub> = 1.
   - (y<sub>n-1</sub>, ..., y<sub>0</sub>) = 1 if I<sub>i</sub> = 1 & E = 1
   - (y<sub>n-1</sub>, ..., y<sub>0</sub>) = 0 otherwise
-  - A = 1 if E = 1, and one i such that I<sub>i</sub> = 1
-  - A = 0 otherwise
-- Logic Diagram: TODO
-- Priority Encoder: TODO
+  - A = 1 if E = 1, and one i such that I<sub>i</sub> = 1 (The address is **valid**)
+  - A = 0 otherwise (The address is **invalid**)
+- Logic Diagram
+- ![a](encoder-1.png)
+- Priority Encoder
+  - Input (I<sub>2^n-1</sub>, ..., I<sub>0</sub>), output (y<sub>n-1</sub>, ..., y<sub>0</sub>)
+  - (y<sub>n-1</sub>, ..., y<sub>0</sub>) = i if I<sub>i</sub> = 1 and E = 1 and I<sub>k</sub> = 0
+  - where for all k > i (higher priority) or all k < i (lower priority)
+  - ![a](p-encoder-1.png)
 ### Multiplexer (Mux)
 - def: *A digital module that selects one of data inputs according to the binary address of the selector.* 
   - If E = 1
@@ -420,7 +426,12 @@
     - y = 0
   - Selects between one of N inputs to connect to the output
   - log<sub>2</sub>N-bit select input - control input
+  - - ![a](mux-1.png)
+  - Example: 2:1 Mux
+  - ![a](mux-2.png)
 - Logic Diagram
+  - logic gates: SOP
+  - ![a](mux-3.png)
 - Application
   - Universal Set: {Mux}
     - Use selector to decompose the function into smaller functions, which follows **Shannon's Expression**
