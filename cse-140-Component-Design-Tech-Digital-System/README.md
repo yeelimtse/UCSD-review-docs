@@ -294,6 +294,40 @@
     - The state diagram will be 
     - ![a](SR-statediagram.png)
     - Tangling problem exists (state `11`)
+- Moore Machine VS Mealy Machine
+  - Mealy:
+    - Transition format: input/output
+    - example: S1 -- 1/0 --> S2
+    - This means from state 1, if the input is 1, goes to state 2, and the output is 0
+  - Moore:
+    - Transition format: input
+    - Outputs are carried by each state
+    - example: S1(0) -- 1 --> S2(1)
+    - This means from state 1, if the input is 1, goes to state 2, the output is 1
+  - Diagram
+  - ![a](moore-mealy.png)
+  - state diagram
+    - Mealy
+      - | s  | 0    | 1    |
+        |----|------|------|
+        | s0 | s0,0 | s1,0 |
+        | s1 | s1,0 | s0,1 |
+      - format: state, input 0, input 1
+      - For each cell: next state, output of the transition
+    - Moore
+      - | s  | 0  | 1  | y |
+        |----|----|----|---|
+        | s0 | s0 | s1 | 0 |
+        | s1 | s1 | s0 | 1 |
+      - format: state, input 0, input 1, output y
+      - For each cell: state
+  - Conversion between Mealy and Moore
+  - ![a](moore-mealy-c.png)
+    - Note the transition that outputs 1 in Mealy Machine
+    - For each output 1, we need an extra state in Moore Machine. Here we have s2
+    - We look at the original pointed state in Mealy Machine, which is s0, because when we are at state 1 and the input is 1, we go to state 0.
+    - In Mealy Machine, s0 goes to itself when input is 0, and to s1 when input is 1
+    - Therefore, for the added state s2, it should go to s0 when input is 0, and to s1 when input is 1
 ### **Implementation**
 ### **Timing and Retiming**
 - Motivation
@@ -381,7 +415,6 @@
     - Adjust the clock skew so that the clock period can be reduced.
 ---
 ## **Standard Modules**
-### **Part III - Standard Combinational Modules**
 ### Introduction
 ### Decoder
 - def: *A digital module that converts a binary **address** to the assertion of the addressed **device***
