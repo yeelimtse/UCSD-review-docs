@@ -322,7 +322,7 @@
       - format: state, input 0, input 1, output y
       - For each cell: state
   - Conversion between Mealy and Moore
-  - ![a](moore-mealy-c.png)
+  - ![a](mealy-moore-c.png)
     - Note the transition that outputs 1 in Mealy Machine
     - For each output 1, we need an extra state in Moore Machine. Here we have s2
     - We look at the original pointed state in Mealy Machine, which is s0, because when we are at state 1 and the input is 1, we go to state 0.
