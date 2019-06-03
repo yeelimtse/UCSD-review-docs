@@ -471,6 +471,61 @@
     - Simplify the decomposed functions using K-map, which follows **consensus theorem**
   - Building Blocks of FPGA (Field Programmable Gate Array)
 ### Demultiplexier (DeMux)
+- TODO
+## **Adders**
+### **1. Representation of numbers**
+- 2's complement
+  - For a negative number, we do 1's complement and plus one. 
+  - -x is represented by 2<sup>n</sup> - x
+  - eg: 
+    - if we are using for bits, and given x = 1, then -x will be
+    - -1 is represented by 2<sup>4</sup> - 1 = 15 (1111)
+- 1's complement
+  - For a negative number, we take the positive number and complement every bit
+  - -x is represented by 2<sup>n</sup> - x - 1
+  - eg: 
+    - if we are using for bits, and given x = 1, then -x will be
+    - -1 is represented by 2<sup>4</sup> - 1 - 1 = 14 (1110)
+- Example
+- ![a](representation-complements.png)
+- Addition: 2's complement overflow
+  - overflow = c<sub>n</sub> XOR c<sub>n-1</sub>
+### **2. Full Adder**
+- 1 bit adder
+- ![a](1-bit-full-adder.png)
+### **3. Half Adder**
+- 1 bit adder
+- ![a](1-bit-half-adder.png)
+### **4. Ripple-Carry Adder (slow)**
+- Chain 1 bit adders together
+- Carry ripples through entire chain
+- ![a](ripple-carry-adder.png)
+- The delay of an N bit RCA is t<sub>ripple</sub> = Nt<sub>FA</sub>
+- t<sub>FA</sub> is the delay of a full adder
+### **5. Carry Look Ahead Adder (fast)**
+- Compress the logic levels of C<sub>out</sub>
+- Some definitions
+  - G<sub>i</sub> - generate
+    - A column will generate a carry out if Ai AND Bi are both 1. 
+    - `Gi = AiBi`
+  - P<sub>i</sub> - propagate
+    - A column will propagate a carry in to the carry out if Ai OR Bi is 1
+    - `Pi = Ai + Bi`
+  - The carry out of a column Ci is 
+    - `C_(i+1) = AiBi + (Ai + Bi)Ci = Gi + PiCi`
+- ![a](carry-lookahead-adder.png)
+- Steps
+  - 1. compute G and P signals for columns (single bits)
+  - 2. compute G and P for k bit block
+  - 3. Cin propagates through each k bit propagate/generate block
+### **6. Prefix Adder (faster)**
+- Computes the carry in (C<sub>i-1</sub>) for each of the columns as fast as possible and then computes the sum:
+- $S_i = (A_i \bigoplus B_i) \bigoplus C_i$
+- Computes G and P for 1-bit, then 2-bit blocks, then 4-bit blocks, then 8-bit blocks, etc. until the carry in (generate signal) is known for each column
+- Has log<sub>2</sub>N stages
+- TODO
+### **7. Carry Save Adder**
+## **ALU Multiplier Division**
 ---
 ## **Data Path Subsystem (Final)**
 ---
