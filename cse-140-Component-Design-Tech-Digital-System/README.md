@@ -523,8 +523,34 @@
 - $S_i = (A_i \bigoplus B_i) \bigoplus C_i$
 - Computes G and P for 1-bit, then 2-bit blocks, then 4-bit blocks, then 8-bit blocks, etc. until the carry in (generate signal) is known for each column
 - Has log<sub>2</sub>N stages
-- TODO
+- Schematic 
+- ![a](prefix-adder-schematic.png)
+  - For each black dot
+  - **G<sub>i:j</sub> = G<sub>i:k</sub> + P<sub>i:k</sub>G<sub>k-1:j</sub>**
+  - **P<sub>i:j</sub> = P<sub>i:k</sub>P<sub>k-1:j</sub>**
+- Delay
+  - For N-bit prefix adder
+  - t<sub>PA</sub> = t<sub>pg</sub> + log<sub>2</sub>N(t<sub>pg_prefix</sub>) + t<sub>XOR</sub>
+  - t<sub>pg</sub> is the delay of the column generate and propagate gates (AND or OR gate)
+  - t<sub>pg_prefix</sub> is the delay of the black prefix cell (AND-OR gate)
 ### **7. Carry Save Adder**
+- Fast and low power addition for multiple additions
+  - A Redundant Number System
+  - Save the Partial Solution for Multiple Additions
+  - One Bit Propagation for Each Addition
+- Procedure of CSA system
+  - 1. Convert the first addend to the redundant number system
+  - 2. For intermediate solution, perform carry save addition.
+  - 3. Split the redundant number into two numbers.
+  - 4. Perform the addition on the two numbers to general the solution.
+### **Adder Delay Comparisons**
+- Compare the delay of 32-bit ripple-carry, carrylookahead, and prefix adders. The carry-lookahead adder has 4-bit blocks. Assume that each two-input gate delay is 100 ps and the full adder delay is 300 ps.
+- t<sub>ripple</sub> = Nt<sub>FA</sub> = 32(300 ps) = 9.6 ns
+- t<sub>CLA</sub> = t<sub>pg</sub> + t<sub>pg_block</sub> + (N/k – 1)t<sub>AND_OR</sub> + kt<sub>FA</sub> = [100 + 600+ (7)200 + 4(300)] ps = 3.3 ns
+- t<sub>PA</sub> = t<sub>pg</sub> + log2N(t<sub>pg_prefix</sub>) + t<sub>XOR</sub> = [100 + log<sub>2</sub>32(200) + 100] ps = 1.2 ns
+### **Comparator**
+- Check bit by bit from left to right
+- ![a](comparator.png)
 ## **ALU Multiplier Division**
 ---
 ## **Data Path Subsystem (Final)**
